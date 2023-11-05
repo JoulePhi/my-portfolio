@@ -103,3 +103,80 @@ class Projectcard extends StatelessWidget {
     );
   }
 }
+
+class ProjectcardPhone extends StatelessWidget {
+  const ProjectcardPhone({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        border: Border.all(color: grey),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 200,
+            child: Placeholder(),
+          ),
+          Container(
+            decoration: const BoxDecoration(
+              border: Border.symmetric(
+                horizontal: BorderSide(color: grey),
+              ),
+            ),
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      'HTML',
+                      style: greyText.copyWith(fontSize: 12),
+                    ),
+                    spaceH(8),
+                    Text(
+                      'Python',
+                      style: greyText.copyWith(fontSize: 12),
+                    ),
+                    spaceH(8),
+                    Text(
+                      'SCSS',
+                      style: greyText.copyWith(fontSize: 12),
+                    ),
+                    spaceH(8),
+                    Text(
+                      'Flask',
+                      style: greyText.copyWith(fontSize: 12),
+                    ),
+                    spaceH(8),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'ChertNodes',
+                  style: whiteText.copyWith(
+                    fontSize: 18,
+                    fontWeight: medium,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
