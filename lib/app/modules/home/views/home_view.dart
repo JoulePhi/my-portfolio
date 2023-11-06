@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:portfolio/app/modules/home/views/navbar.dart';
-import 'package:portfolio/app/modules/home/views/project_card.dart';
+import 'package:portfolio/app/modules/home/views/desktop_widget.dart';
+import 'package:portfolio/app/modules/home/views/phone_widget.dart';
+import 'package:portfolio/app/widgets/drawer_phone.dart';
+import 'package:portfolio/app/widgets/navbar.dart';
 import 'package:portfolio/app/shared/utils.dart';
-import 'package:portfolio/app/widgets/phone_widget.dart';
-import '../../../widgets/desktop_widget.dart';
+import 'package:portfolio/app/widgets/project_card.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetResponsiveView<HomeController> {
-  HomeView({super.key})
-      : super(
-          settings: const ResponsiveScreenSettings(
-              desktopChangePoint: 1000,
-              tabletChangePoint: 768,
-              watchChangePoint: 300),
-        );
+  HomeView({super.key});
 
   @override
   Widget? desktop() {
@@ -26,7 +21,9 @@ class HomeView extends GetResponsiveView<HomeController> {
           controller: controller.scrollControler,
           padding: EdgeInsets.symmetric(horizontal: Get.width * .1),
           children: [
-            const NavBar(),
+            const NavBar(
+              currentPage: 'home',
+            ),
             BannerTop(
               controller: controller,
               screen: screen.screenType,
@@ -35,15 +32,27 @@ class HomeView extends GetResponsiveView<HomeController> {
             spaceV(100),
             const Projects(),
             spaceV(50),
-            Row(
-              children: [
-                const Projectcard(),
-                spaceH(16),
-                const Projectcard(),
-                spaceH(16),
-                const Projectcard(),
-              ],
-            ),
+            Get.width < 1500
+                ? Row(
+                    children: [
+                      const Projectcard(),
+                      spaceH(16),
+                      const Projectcard(),
+                      spaceH(16),
+                      const Projectcard(),
+                    ],
+                  )
+                : Row(
+                    children: [
+                      const Projectcard(),
+                      spaceH(16),
+                      const Projectcard(),
+                      spaceH(16),
+                      const Projectcard(),
+                      spaceH(16),
+                      const Projectcard(),
+                    ],
+                  ),
             spaceV(50),
             const Skills(),
             const SkillsElement(),
@@ -71,7 +80,6 @@ class HomeView extends GetResponsiveView<HomeController> {
 
   @override
   Widget? tablet() {
-    // TODO: implement tablet
     return Scaffold(
       backgroundColor: background,
       body: Scrollbar(
@@ -80,7 +88,9 @@ class HomeView extends GetResponsiveView<HomeController> {
           controller: controller.scrollControler,
           padding: EdgeInsets.symmetric(horizontal: Get.width * .1),
           children: [
-            const NavBar(),
+            const NavBar(
+              currentPage: 'home',
+            ),
             BannerTop(
               controller: controller,
               screen: screen.screenType,
@@ -126,9 +136,17 @@ class HomeView extends GetResponsiveView<HomeController> {
   @override
   Widget? phone() {
     return Scaffold(
+      key: controller.scaffoldKey,
+      drawer: DrawerPhone(
+        onTap: () {
+          controller.scaffoldKey.currentState!.closeDrawer();
+        },
+      ),
       backgroundColor: background,
       appBar: AppBar(
         backgroundColor: background,
+        automaticallyImplyLeading: false,
+        leading: null,
         title: Text(
           'JoulePhi',
           style: whiteText.copyWith(
@@ -139,9 +157,14 @@ class HomeView extends GetResponsiveView<HomeController> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Image.asset(
-              'assets/images/burger.png',
-              width: 24,
+            child: GestureDetector(
+              onTap: () {
+                controller.scaffoldKey.currentState!.openDrawer();
+              },
+              child: Image.asset(
+                'assets/images/burger.png',
+                width: 24,
+              ),
             ),
           )
         ],
@@ -157,6 +180,22 @@ class HomeView extends GetResponsiveView<HomeController> {
           const ProjectsPhone(),
           spaceV(Get.height * .08),
           const SkillsElementPhone(),
+          spaceV(Get.height * .08),
+          AboutMePhone(
+            controller: controller,
+          ),
+          spaceV(Get.height * .08),
+          const ContactsPhone(),
+          spaceV(32),
+          const Divider(
+            color: grey,
+          ),
+          spaceV(16),
+          Text(
+            '© Copyright 2023. Made by JoulePhi',
+            style: greyText.copyWith(fontSize: 12),
+          ),
+          spaceV(16),
         ],
       ),
     );

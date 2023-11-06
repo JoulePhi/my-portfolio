@@ -2,10 +2,9 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/app/modules/home/controllers/home_controller.dart';
-import 'package:portfolio/app/modules/home/views/message_card.dart';
 import 'package:portfolio/app/shared/utils.dart';
-
-import '../modules/home/views/skill_card.dart';
+import 'package:portfolio/app/widgets/message_card.dart';
+import 'package:portfolio/app/widgets/skill_card.dart';
 
 class ContactBox extends StatelessWidget {
   const ContactBox({
@@ -18,47 +17,52 @@ class ContactBox extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Flexible(
-          flex: 1,
+          flex: 4,
           child: Text(
             'I’m interested in freelance opportunities. However, if you have other request or question, don’t hesitate to contact me',
             style: greyText.copyWith(
               fontSize: 16,
               fontWeight: medium,
             ),
+            overflow: TextOverflow.clip,
           ),
         ),
         Flexible(
-          flex: 1,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+          flex: 5,
+          child: Wrap(
             children: [
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                  color: grey,
-                )),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Message me here',
-                      style: whiteText.copyWith(
-                          fontSize: 16, fontWeight: semiBold),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                    color: grey,
+                  )),
+                  child: FittedBox(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Message me here',
+                          style: whiteText.copyWith(
+                              fontSize: 16, fontWeight: semiBold),
+                        ),
+                        spaceV(16),
+                        const MessageCard(
+                            icon: 'assets/images/email.png',
+                            contacts: 'dzulfikar.sadid.khoir@gmail.com'),
+                        spaceV(16),
+                        const MessageCard(
+                            icon: 'assets/images/whatsapp.png',
+                            contacts: '+62 813-2008-2893'),
+                        spaceV(16),
+                        const MessageCard(
+                            icon: 'assets/images/instagram.png',
+                            contacts: '@joulephi'),
+                      ],
                     ),
-                    spaceV(16),
-                    const MessageCard(
-                        icon: 'assets/images/email.png',
-                        contacts: 'dzulfikar.sadid.khoir@gmail.com'),
-                    spaceV(16),
-                    const MessageCard(
-                        icon: 'assets/images/whatsapp.png',
-                        contacts: '+62 813-2008-2893'),
-                    spaceV(16),
-                    const MessageCard(
-                        icon: 'assets/images/instagram.png',
-                        contacts: '@joulephi'),
-                  ],
+                  ),
                 ),
               ),
             ],
@@ -121,7 +125,7 @@ class AboutMe extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Flexible(
-          flex: 1,
+          flex: 5,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -185,42 +189,42 @@ class AboutMe extends StatelessWidget {
           ),
         ),
         Flexible(
-          flex: 1,
-          child: Center(
-            child: Stack(
-              children: [
-                Positioned(
-                  right: 90,
-                  top: 120,
-                  child: Image.asset(
-                    'assets/images/dots.png',
-                    width: 84,
-                  ),
+          flex: 4,
+          child: Stack(
+            children: [
+              Positioned(
+                right: 90,
+                top: 120,
+                child: Image.asset(
+                  'assets/images/dots.png',
+                  width: 84,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                        border: Border(bottom: BorderSide(color: primary)),
-                      ),
-                      child: Image.asset(
+              ),
+              Container(
+                height: 500,
+                decoration: const BoxDecoration(
+                    border: Border(bottom: BorderSide(color: primary)),
+                    image: DecorationImage(
+                      fit: BoxFit.fitHeight,
+                      image: AssetImage(
                         'assets/images/me-4.png',
-                        height: 500,
                       ),
-                    ),
-                  ],
+                    )),
+                alignment: Alignment.bottomCenter,
+                // child: Image.asset(
+                //   'assets/images/me-4.png',
+                //   height: 500,
+                // ),
+              ),
+              Positioned(
+                left: 40,
+                bottom: 10,
+                child: Image.asset(
+                  'assets/images/dots.png',
+                  width: 84,
                 ),
-                Positioned(
-                  left: 40,
-                  bottom: 10,
-                  child: Image.asset(
-                    'assets/images/dots.png',
-                    width: 84,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         )
       ],
@@ -420,7 +424,7 @@ class Projects extends StatelessWidget {
     return Row(
       children: [
         Flexible(
-          flex: 2,
+          flex: 3,
           child: Row(
             children: [
               RichText(
@@ -452,13 +456,28 @@ class Projects extends StatelessWidget {
         ),
         Flexible(
           flex: 1,
-          child: Container(
-            alignment: Alignment.centerRight,
-            child: Text(
-              'View all ~~>',
-              style: whiteText.copyWith(
-                fontSize: 16,
-                fontWeight: medium,
+          child: Obx(
+            () => Container(
+              alignment: Alignment.centerRight,
+              child: InkWell(
+                onHover: (a) {
+                  Get.find<HomeController>().viewAllIsHover.value = a;
+                },
+                onTap: () {
+                  Get.offAllNamed('/projects');
+                },
+                child: Text(
+                  'View all ~~>',
+                  style: Get.find<HomeController>().viewAllIsHover.value
+                      ? lightGreyText.copyWith(
+                          fontSize: 16,
+                          fontWeight: medium,
+                        )
+                      : whiteText.copyWith(
+                          fontSize: 16,
+                          fontWeight: medium,
+                        ),
+                ),
               ),
             ),
           ),
@@ -475,12 +494,13 @@ class Quote extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Wrap(
+      alignment: WrapAlignment.center,
       children: [
-        Wrap(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+            Stack(
               children: [
                 Container(
                   padding: const EdgeInsets.all(32),
@@ -496,45 +516,33 @@ class Quote extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: grey),
-                  ),
-                  child: Text(
-                    '- Dr. Who',
-                    style: whiteText.copyWith(
-                      fontSize: 24,
+                Positioned(
+                  top: 80,
+                  left: 20,
+                  child: Container(
+                    color: background,
+                    padding: const EdgeInsets.all(10),
+                    child: Image.asset(
+                      'assets/images/up-quote.png',
+                      width: 25,
                     ),
                   ),
                 ),
               ],
             ),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                border: Border.all(color: grey),
+              ),
+              child: Text(
+                '- Dr. Who',
+                style: whiteText.copyWith(
+                  fontSize: 24,
+                ),
+              ),
+            ),
           ],
-        ),
-        Positioned(
-          top: 80,
-          left: Get.width * .25,
-          child: Container(
-            color: background,
-            padding: const EdgeInsets.all(10),
-            child: Image.asset(
-              'assets/images/up-quote.png',
-              width: 25,
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 50,
-          right: Get.width * .2,
-          child: Container(
-            color: background,
-            padding: const EdgeInsets.all(10),
-            child: Image.asset(
-              'assets/images/up-quote.png',
-              width: 25,
-            ),
-          ),
         ),
       ],
     );

@@ -18,6 +18,7 @@ class MessageCard extends StatelessWidget {
         Text(
           contacts,
           style: greyText.copyWith(fontSize: 16),
+          overflow: TextOverflow.ellipsis,
         )
       ],
     );

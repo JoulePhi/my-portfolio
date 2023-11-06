@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:portfolio/app/data/navbar_controller.dart';
 import 'package:portfolio/app/modules/home/controllers/home_controller.dart';
 import 'package:portfolio/app/shared/utils.dart';
 
-class NavBar extends StatelessWidget {
-  const NavBar({super.key});
-
+class NavBar extends GetView<NavbarController> {
+  const NavBar({super.key, required this.currentPage});
+  final String currentPage;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -22,18 +23,24 @@ class NavBar extends StatelessWidget {
         ),
         const Spacer(),
         Obx(() => Row(
-              children: Get.find<HomeController>()
-                  .navbar
+              children: controller.navbar
                   .map((e) => NavbarItem(
                       title: e,
-                      isSelected: 'home',
+                      isSelected:
+                          controller.navbar[controller.selectedPage.value],
                       onHover: (a) {
-                        Get.find<HomeController>().navbarIsHover[
-                            Get.find<HomeController>().navbar.indexOf(e)] = a;
+                        controller.navbarIsHover[controller.navbar.indexOf(e)] =
+                            a;
                       },
-                      onTap: () {},
-                      isHover: Get.find<HomeController>().navbarIsHover[
-                          Get.find<HomeController>().navbar.indexOf(e)]))
+                      onTap: () {
+                        controller.selectedPage.value =
+                            controller.navbar.indexOf(e);
+
+                        Get.offAllNamed(
+                            '/${controller.navbar[controller.selectedPage.value]}');
+                      },
+                      isHover: controller
+                          .navbarIsHover[controller.navbar.indexOf(e)]))
                   .toList(),
             ))
       ],

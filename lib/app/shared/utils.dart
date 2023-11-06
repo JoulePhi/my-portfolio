@@ -36,6 +36,7 @@ primaryButton({
   return InkWell(
     onHover: onHover,
     onTap: onTap,
+    splashColor: primary.withOpacity(.2),
     child: AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       padding: const EdgeInsets.all(10),

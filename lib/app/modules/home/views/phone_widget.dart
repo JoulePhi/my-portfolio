@@ -2,9 +2,10 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/app/modules/home/controllers/home_controller.dart';
-import 'package:portfolio/app/modules/home/views/project_card.dart';
-import 'package:portfolio/app/modules/home/views/skill_card.dart';
 import 'package:portfolio/app/shared/utils.dart';
+import 'package:portfolio/app/widgets/message_card.dart';
+import 'package:portfolio/app/widgets/project_card.dart';
+import 'package:portfolio/app/widgets/skill_card.dart';
 
 class BannerPhone extends StatelessWidget {
   const BannerPhone({
@@ -183,18 +184,6 @@ class QuotePhone extends StatelessWidget {
             ),
           ),
         ),
-        Positioned(
-          bottom: 50,
-          right: Get.width * .1,
-          child: Container(
-            color: background,
-            padding: const EdgeInsets.all(10),
-            child: Image.asset(
-              'assets/images/up-quote.png',
-              width: 17,
-            ),
-          ),
-        ),
       ],
     );
   }
@@ -235,14 +224,19 @@ class ProjectsPhone extends StatelessWidget {
                 color: primary,
               ),
             ),
-            Container(
-              alignment: Alignment.centerRight,
-              margin: const EdgeInsets.only(left: 16),
-              child: Text(
-                'View all ~~>',
-                style: whiteText.copyWith(
-                  fontSize: 12,
-                  fontWeight: medium,
+            InkWell(
+              onTap: () {
+                Get.offAllNamed('/projects');
+              },
+              child: Container(
+                alignment: Alignment.centerRight,
+                margin: const EdgeInsets.only(left: 16),
+                child: Text(
+                  'View all ~~>',
+                  style: whiteText.copyWith(
+                    fontSize: 12,
+                    fontWeight: medium,
+                  ),
                 ),
               ),
             ),
@@ -362,6 +356,144 @@ class SkillsElementPhone extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ],
+    );
+  }
+}
+
+class AboutMePhone extends StatelessWidget {
+  const AboutMePhone({super.key, required this.controller});
+  final HomeController controller;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            RichText(
+              text: TextSpan(
+                text: '#',
+                style: primaryText.copyWith(
+                  fontSize: 18,
+                  fontWeight: medium,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: 'about-me',
+                    style: whiteText.copyWith(
+                      fontSize: 18,
+                      fontWeight: medium,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            spaceH(16),
+            const Expanded(
+              child: Divider(
+                color: primary,
+              ),
+            )
+          ],
+        ),
+        spaceV(16),
+        Text('Hello, I\'m JoulePhi!', style: greyText.copyWith(fontSize: 16)),
+        spaceV(16),
+        Text(
+          "I'm a self-taught front-end developer based in Kyiv, Ukraine. I can develop responsive websites from scratch and raise them into modern user-friendly web experiences.",
+          style: greyText.copyWith(fontSize: 16),
+          textAlign: TextAlign.left,
+        ),
+        spaceV(16),
+        Obx(
+          () => primaryButton(
+              title: 'Read more ->',
+              onHover: (a) {
+                controller.readMoreButtonHover.value = a;
+              },
+              onTap: () {},
+              isHover: controller.readMoreButtonHover.value),
+        )
+      ],
+    );
+  }
+}
+
+class ContactsPhone extends StatelessWidget {
+  const ContactsPhone({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            RichText(
+              text: TextSpan(
+                text: '#',
+                style: primaryText.copyWith(
+                  fontSize: 16,
+                  fontWeight: medium,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: 'contacts',
+                    style: whiteText.copyWith(
+                      fontSize: 16,
+                      fontWeight: medium,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            spaceH(16),
+            const Expanded(
+              child: Divider(
+                color: primary,
+              ),
+            )
+          ],
+        ),
+        spaceV(16),
+        Text(
+          'I’m interested in freelance opportunities. However, if you have other request or question, don’t hesitate to contact me',
+          style: greyText.copyWith(
+            fontSize: 16,
+            fontWeight: medium,
+          ),
+          overflow: TextOverflow.clip,
+        ),
+        spaceV(16),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+              border: Border.all(
+            color: grey,
+          )),
+          child: FittedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Message me here',
+                  style: whiteText.copyWith(fontSize: 16, fontWeight: semiBold),
+                ),
+                spaceV(16),
+                const MessageCard(
+                    icon: 'assets/images/email.png',
+                    contacts: 'dzulfikar.sadid.khoir@gmail.com'),
+                spaceV(16),
+                const MessageCard(
+                    icon: 'assets/images/whatsapp.png',
+                    contacts: '+62 813-2008-2893'),
+                spaceV(16),
+                const MessageCard(
+                    icon: 'assets/images/instagram.png', contacts: '@joulephi'),
+              ],
+            ),
+          ),
         ),
       ],
     );
