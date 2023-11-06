@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 import 'package:get/get.dart';
 import 'package:portfolio/app/shared/utils.dart';
@@ -6,6 +7,7 @@ import 'package:portfolio/app/widgets/drawer_phone.dart';
 import 'package:portfolio/app/widgets/experience_card.dart';
 import 'package:portfolio/app/widgets/navbar.dart';
 import 'package:portfolio/app/widgets/skill_card.dart';
+import 'package:portfolio/app/widgets/staggered_animation.dart';
 
 import '../controllers/about_me_controller.dart';
 
@@ -52,66 +54,88 @@ class AboutMeView extends GetResponsiveView<AboutMeController> {
             children: [
               Flexible(
                 flex: 5,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Hello, I\'m JoulePhi!',
-                        style: greyText.copyWith(fontSize: 16)),
-                    spaceV(16),
-                    Text(
-                      'I’m a self-taught front-end developer based in Kyiv, Ukraine. '
-                      'I can develop responsive websites from scratch and raise them '
-                      'into modern user-friendly web experiences.',
-                      style: greyText.copyWith(fontSize: 16),
+                child: AnimationConfiguration.staggeredList(
+                  duration: const Duration(seconds: 1),
+                  delay: const Duration(seconds: 1),
+                  position: 0,
+                  child: SlideAnimation(
+                    horizontalOffset: 100,
+                    child: FadeInAnimation(
+                      duration: const Duration(seconds: 1),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Hello, I\'m JoulePhi!',
+                              style: greyText.copyWith(fontSize: 16)),
+                          spaceV(16),
+                          Text(
+                            'I’m a self-taught front-end developer based in Kyiv, Ukraine. '
+                            'I can develop responsive websites from scratch and raise them '
+                            'into modern user-friendly web experiences.',
+                            style: greyText.copyWith(fontSize: 16),
+                          ),
+                          spaceV(16),
+                          Text(
+                            'Transforming my creativity and knowledge into websites has been my '
+                            'passion for over a year. I have been helping various clients to '
+                            'establish their presence online. I always strive to learn about the '
+                            'newest technologies and frameworks.',
+                            style: greyText.copyWith(fontSize: 16),
+                          ),
+                        ],
+                      ),
                     ),
-                    spaceV(16),
-                    Text(
-                      'Transforming my creativity and knowledge into websites has been my '
-                      'passion for over a year. I have been helping various clients to '
-                      'establish their presence online. I always strive to learn about the '
-                      'newest technologies and frameworks.',
-                      style: greyText.copyWith(fontSize: 16),
-                    ),
-                  ],
+                  ),
                 ),
               ),
               Flexible(
                 flex: 4,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      right: 90,
-                      top: 120,
-                      child: Image.asset(
-                        'assets/images/dots.png',
-                        width: 84,
-                      ),
-                    ),
-                    Container(
-                      height: 500,
-                      decoration: const BoxDecoration(
-                          border: Border(bottom: BorderSide(color: primary)),
-                          image: DecorationImage(
-                            fit: BoxFit.fitHeight,
-                            image: AssetImage(
-                              'assets/images/me-half.png',
+                child: AnimationConfiguration.staggeredList(
+                  duration: const Duration(seconds: 1),
+                  position: 1,
+                  child: SlideAnimation(
+                    horizontalOffset: 100,
+                    child: FadeInAnimation(
+                      duration: const Duration(seconds: 1),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            right: 90,
+                            top: 120,
+                            child: Image.asset(
+                              'assets/images/dots.png',
+                              width: 84,
                             ),
-                          )),
-                      alignment: Alignment.bottomCenter,
-                      // child: Image.asset(
-                      //   'assets/images/me-4.png',
-                      //   height: 500,
-                      // ),
-                    ),
-                    Positioned(
-                      left: 40,
-                      bottom: 10,
-                      child: Image.asset(
-                        'assets/images/dots.png',
-                        width: 84,
+                          ),
+                          Container(
+                            height: 500,
+                            decoration: const BoxDecoration(
+                                border:
+                                    Border(bottom: BorderSide(color: primary)),
+                                image: DecorationImage(
+                                  fit: BoxFit.fitHeight,
+                                  image: AssetImage(
+                                    'assets/images/me-half.png',
+                                  ),
+                                )),
+                            alignment: Alignment.bottomCenter,
+                            // child: Image.asset(
+                            //   'assets/images/me-4.png',
+                            //   height: 500,
+                            // ),
+                          ),
+                          Positioned(
+                            left: 40,
+                            bottom: 10,
+                            child: Image.asset(
+                              'assets/images/dots.png',
+                              width: 84,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
               )
             ],
@@ -141,71 +165,91 @@ class AboutMeView extends GetResponsiveView<AboutMeController> {
             children: [
               Flexible(
                 flex: 1,
-                child: SkillCard(
-                  title: 'Language',
-                  skills: [
-                    'C++',
-                    'Python',
-                    'Dart',
-                    'PHP',
-                    'Javascript',
-                  ],
+                child: StaggeredAnimate(
+                  position: 0,
+                  direction: Axis.horizontal,
+                  child: SkillCard(
+                    title: 'Language',
+                    skills: [
+                      'C++',
+                      'Python',
+                      'Dart',
+                      'PHP',
+                      'Javascript',
+                    ],
+                  ),
                 ),
               ),
               Flexible(
                 flex: 1,
-                child: SkillCard(
-                  title: 'Databases',
-                  skills: [
-                    'MySQL',
-                    'MongoDB',
-                    'Redis',
-                    'Firebase',
-                  ],
+                child: StaggeredAnimate(
+                  position: 1,
+                  direction: Axis.horizontal,
+                  child: SkillCard(
+                    title: 'Databases',
+                    skills: [
+                      'MySQL',
+                      'MongoDB',
+                      'Redis',
+                      'Firebase',
+                    ],
+                  ),
                 ),
               ),
               Flexible(
                 flex: 1,
-                child: SkillCard(
-                  title: 'Other',
-                  skills: [
-                    'HTML',
-                    'CSS',
-                    'REST',
-                  ],
+                child: StaggeredAnimate(
+                  position: 2,
+                  direction: Axis.horizontal,
+                  child: SkillCard(
+                    title: 'Other',
+                    skills: [
+                      'HTML',
+                      'CSS',
+                      'REST',
+                    ],
+                  ),
                 ),
               ),
               Flexible(
                 flex: 1,
-                child: SkillCard(
-                  title: 'Tools',
-                  skills: [
-                    'VSCode',
-                    'Figma',
-                    'Postman',
-                    'Laragon',
-                    'Git',
-                    'Linux'
-                  ],
+                child: StaggeredAnimate(
+                  position: 3,
+                  direction: Axis.horizontal,
+                  child: SkillCard(
+                    title: 'Tools',
+                    skills: [
+                      'VSCode',
+                      'Figma',
+                      'Postman',
+                      'Laragon',
+                      'Git',
+                      'Linux'
+                    ],
+                  ),
                 ),
               ),
               Flexible(
                 flex: 1,
-                child: SkillCard(
-                  title: 'Frameworks',
-                  skills: [
-                    'Flutter',
-                    'Laravel',
-                    'Vue JS',
-                    'Inertia JS',
-                    'Arduino',
-                    'Tailwind'
-                  ],
+                child: StaggeredAnimate(
+                  position: 4,
+                  direction: Axis.horizontal,
+                  child: SkillCard(
+                    title: 'Frameworks',
+                    skills: [
+                      'Flutter',
+                      'Laravel',
+                      'Vue JS',
+                      'Inertia JS',
+                      'Arduino',
+                      'Tailwind'
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
-          spaceV(90),
+          spaceV(100),
           RichText(
             text: TextSpan(
               text: '#',
@@ -235,9 +279,21 @@ class AboutMeView extends GetResponsiveView<AboutMeController> {
                     spacing: 8,
                     alignment: WrapAlignment.start,
                     children: controller.experiences
-                        .map((e) => ExperienceCard(
-                              experience: e,
-                            ))
+                        .map(
+                          (e) => AnimationConfiguration.staggeredList(
+                            duration: const Duration(seconds: 1),
+                            position: controller.experiences.indexOf(e),
+                            child: SlideAnimation(
+                              verticalOffset: 100,
+                              child: FadeInAnimation(
+                                duration: const Duration(seconds: 1),
+                                child: ExperienceCard(
+                                  experience: e,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
                         .toList(),
                   ),
                 ),

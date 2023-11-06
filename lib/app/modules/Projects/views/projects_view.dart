@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 import 'package:get/get.dart';
 import 'package:portfolio/app/shared/utils.dart';
@@ -62,99 +63,114 @@ class ProjectsView extends GetResponsiveView<ProjectsController> {
                 alignment: WrapAlignment.start,
                 children: List.generate(
                   5,
-                  (index) => Container(
-                    width: 310,
-                    margin: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: grey),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 200,
-                          child: Placeholder(),
-                        ),
-                        Container(
-                          decoration: const BoxDecoration(
-                            border: Border.symmetric(
-                              horizontal: BorderSide(color: grey),
-                            ),
+                  (index) => AnimationConfiguration.staggeredList(
+                    duration: const Duration(seconds: 1),
+                    position: index,
+                    child: SlideAnimation(
+                      verticalOffset: 500,
+                      child: FadeInAnimation(
+                        duration: const Duration(seconds: 1),
+                        child: Container(
+                          width: 310,
+                          margin: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: grey),
                           ),
-                          width: double.infinity,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Text(
-                                    'HTML',
-                                    style: greyText.copyWith(fontSize: 16),
-                                  ),
-                                  spaceH(8),
-                                  Text(
-                                    'Python',
-                                    style: greyText.copyWith(fontSize: 16),
-                                  ),
-                                  spaceH(8),
-                                  Text(
-                                    'SCSS',
-                                    style: greyText.copyWith(fontSize: 16),
-                                  ),
-                                  spaceH(8),
-                                  Text(
-                                    'Flask',
-                                    style: greyText.copyWith(fontSize: 16),
-                                  ),
-                                  spaceH(8),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(16),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'ChertNodes',
-                                style: whiteText.copyWith(
-                                  fontSize: 24,
-                                  fontWeight: medium,
+                              const SizedBox(
+                                height: 200,
+                                child: Placeholder(),
+                              ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                  border: Border.symmetric(
+                                    horizontal: BorderSide(color: grey),
+                                  ),
+                                ),
+                                width: double.infinity,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text(
+                                          'HTML',
+                                          style:
+                                              greyText.copyWith(fontSize: 16),
+                                        ),
+                                        spaceH(8),
+                                        Text(
+                                          'Python',
+                                          style:
+                                              greyText.copyWith(fontSize: 16),
+                                        ),
+                                        spaceH(8),
+                                        Text(
+                                          'SCSS',
+                                          style:
+                                              greyText.copyWith(fontSize: 16),
+                                        ),
+                                        spaceH(8),
+                                        Text(
+                                          'Flask',
+                                          style:
+                                              greyText.copyWith(fontSize: 16),
+                                        ),
+                                        spaceH(8),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
-                              spaceV(16),
-                              Text(
-                                'Minecraft servers hosting',
-                                style: greyText.copyWith(fontSize: 16),
-                              ),
-                              spaceV(16),
-                              Row(
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16, vertical: 8),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(color: primary)),
-                                    child: Text(
-                                      'Live ~~>',
+                              Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'ChertNodes',
                                       style: whiteText.copyWith(
-                                        fontSize: 16,
+                                        fontSize: 24,
                                         fontWeight: medium,
                                       ),
                                     ),
-                                  ),
-                                  spaceH(16),
-                                ],
-                              )
+                                    spaceV(16),
+                                    Text(
+                                      'Minecraft servers hosting',
+                                      style: greyText.copyWith(fontSize: 16),
+                                    ),
+                                    spaceV(16),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16, vertical: 8),
+                                          decoration: BoxDecoration(
+                                              border:
+                                                  Border.all(color: primary)),
+                                          child: Text(
+                                            'Live ~~>',
+                                            style: whiteText.copyWith(
+                                              fontSize: 16,
+                                              fontWeight: medium,
+                                            ),
+                                          ),
+                                        ),
+                                        spaceH(16),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),

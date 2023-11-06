@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/AboutMe/bindings/about_me_binding.dart';
 import '../modules/AboutMe/views/about_me_view.dart';
+import '../modules/Contacts/bindings/contacts_binding.dart';
+import '../modules/Contacts/views/contacts_view.dart';
 import '../modules/Projects/bindings/projects_binding.dart';
 import '../modules/Projects/views/projects_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -12,7 +14,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.PROJECTS;
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
@@ -29,6 +31,11 @@ class AppPages {
       name: _Paths.ABOUT_ME,
       page: () => AboutMeView(),
       binding: AboutMeBinding(),
+    ),
+    GetPage(
+      name: _Paths.CONTACTS,
+      page: () => ContactsView(),
+      binding: ContactsBinding(),
     ),
   ];
 }

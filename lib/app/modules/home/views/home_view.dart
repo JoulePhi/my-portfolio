@@ -6,7 +6,9 @@ import 'package:portfolio/app/widgets/drawer_phone.dart';
 import 'package:portfolio/app/widgets/navbar.dart';
 import 'package:portfolio/app/shared/utils.dart';
 import 'package:portfolio/app/widgets/project_card.dart';
+import 'package:portfolio/app/widgets/staggered_animation.dart';
 import '../controllers/home_controller.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class HomeView extends GetResponsiveView<HomeController> {
   HomeView({super.key});
@@ -35,22 +37,71 @@ class HomeView extends GetResponsiveView<HomeController> {
             Get.width < 1500
                 ? Row(
                     children: [
-                      const Projectcard(),
+                      const Flexible(
+                        flex: 1,
+                        child: StaggeredAnimate(
+                          position: 0,
+                          direction: Axis.vertical,
+                          child: Projectcard(),
+                        ),
+                      ),
                       spaceH(16),
-                      const Projectcard(),
+                      const Flexible(
+                        flex: 1,
+                        child: StaggeredAnimate(
+                          position: 1,
+                          direction: Axis.vertical,
+                          child: Projectcard(),
+                        ),
+                      ),
                       spaceH(16),
-                      const Projectcard(),
+                      const Flexible(
+                        flex: 1,
+                        child: StaggeredAnimate(
+                          position: 2,
+                          direction: Axis.vertical,
+                          child: Projectcard(),
+                        ),
+                      ),
                     ],
                   )
                 : Row(
                     children: [
-                      const Projectcard(),
+                      const Flexible(
+                        flex: 1,
+                        child: StaggeredAnimate(
+                          position: 0,
+                          direction: Axis.vertical,
+                          child: Projectcard(),
+                        ),
+                      ),
                       spaceH(16),
-                      const Projectcard(),
+                      const Flexible(
+                        flex: 1,
+                        child: StaggeredAnimate(
+                          position: 1,
+                          direction: Axis.vertical,
+                          child: Projectcard(),
+                        ),
+                      ),
                       spaceH(16),
-                      const Projectcard(),
+                      const Flexible(
+                        flex: 1,
+                        child: StaggeredAnimate(
+                          position: 2,
+                          direction: Axis.vertical,
+                          child: Projectcard(),
+                        ),
+                      ),
                       spaceH(16),
-                      const Projectcard(),
+                      const Flexible(
+                        flex: 1,
+                        child: StaggeredAnimate(
+                          position: 2,
+                          direction: Axis.vertical,
+                          child: Projectcard(),
+                        ),
+                      ),
                     ],
                   ),
             spaceV(50),

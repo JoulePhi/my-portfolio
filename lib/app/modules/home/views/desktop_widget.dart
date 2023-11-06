@@ -1,10 +1,12 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/app/modules/home/controllers/home_controller.dart';
 import 'package:portfolio/app/shared/utils.dart';
 import 'package:portfolio/app/widgets/message_card.dart';
 import 'package:portfolio/app/widgets/skill_card.dart';
+import 'package:portfolio/app/widgets/staggered_animation.dart';
 
 class ContactBox extends StatelessWidget {
   const ContactBox({
@@ -182,7 +184,9 @@ class AboutMe extends StatelessWidget {
                     onHover: (a) {
                       controller.readMoreButtonHover.value = a;
                     },
-                    onTap: () {},
+                    onTap: () {
+                      Get.offAllNamed('/about-me');
+                    },
                     isHover: controller.readMoreButtonHover.value),
               )
             ],
@@ -304,68 +308,105 @@ class SkillsElement extends StatelessWidget {
             children: [
               Flexible(
                 flex: 1,
-                child: SkillCard(
-                  title: 'Language',
-                  skills: [
-                    'C++',
-                    'Python',
-                    'Dart',
-                    'PHP',
-                    'Javascript',
-                  ],
+                child: StaggeredAnimate(
+                  position: 0,
+                  direction: Axis.vertical,
+                  child: StaggeredAnimate(
+                    position: 0,
+                    direction: Axis.vertical,
+                    delay: Duration(seconds: 1),
+                    child: SkillCard(
+                      title: 'Language',
+                      skills: [
+                        'C++',
+                        'Python',
+                        'Dart',
+                        'PHP',
+                        'Javascript',
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Flexible(
                 flex: 1,
-                child: Column(
-                  children: [
-                    SkillCard(
-                      title: 'Databases',
-                      skills: [
-                        'MySQL',
-                        'MongoDB',
-                        'Redis',
-                        'Firebase',
-                      ],
-                    ),
-                    SkillCard(
-                      title: 'Other',
-                      skills: [
-                        'HTML',
-                        'CSS',
-                        'REST',
-                      ],
-                    ),
-                  ],
+                child: StaggeredAnimate(
+                  position: 1,
+                  direction: Axis.vertical,
+                  child: Column(
+                    children: [
+                      StaggeredAnimate(
+                        position: 0,
+                        direction: Axis.vertical,
+                        delay: Duration(seconds: 1),
+                        child: SkillCard(
+                          title: 'Databases',
+                          skills: [
+                            'MySQL',
+                            'MongoDB',
+                            'Redis',
+                            'Firebase',
+                          ],
+                        ),
+                      ),
+                      StaggeredAnimate(
+                        position: 1,
+                        direction: Axis.vertical,
+                        delay: Duration(seconds: 1),
+                        child: SkillCard(
+                          title: 'Other',
+                          skills: [
+                            'HTML',
+                            'CSS',
+                            'REST',
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Flexible(
                 flex: 1,
-                child: Column(
-                  children: [
-                    SkillCard(
-                      title: 'Tools',
-                      skills: [
-                        'VSCode',
-                        'Figma',
-                        'Postman',
-                        'Laragon',
-                        'Git',
-                        'Linux'
-                      ],
-                    ),
-                    SkillCard(
-                      title: 'Frameworks',
-                      skills: [
-                        'Flutter',
-                        'Laravel',
-                        'Vue JS',
-                        'Inertia JS',
-                        'Arduino',
-                        'Tailwind'
-                      ],
-                    ),
-                  ],
+                child: StaggeredAnimate(
+                  position: 2,
+                  direction: Axis.vertical,
+                  child: Column(
+                    children: [
+                      StaggeredAnimate(
+                        position: 0,
+                        direction: Axis.vertical,
+                        delay: Duration(seconds: 1),
+                        child: SkillCard(
+                          title: 'Tools',
+                          skills: [
+                            'VSCode',
+                            'Figma',
+                            'Postman',
+                            'Laragon',
+                            'Git',
+                            'Linux'
+                          ],
+                        ),
+                      ),
+                      StaggeredAnimate(
+                        position: 1,
+                        direction: Axis.vertical,
+                        delay: Duration(seconds: 1),
+                        child: SkillCard(
+                          title: 'Frameworks',
+                          skills: [
+                            'Flutter',
+                            'Laravel',
+                            'Vue JS',
+                            'Inertia JS',
+                            'Arduino',
+                            'Tailwind'
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],
@@ -566,125 +607,131 @@ class BannerTop extends StatelessWidget {
         children: [
           Flexible(
             flex: 1,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                RichText(
-                  text: TextSpan(
-                    style: whiteText.copyWith(
-                      fontSize: 32,
-                      fontWeight: semiBold,
-                    ),
-                    children: [
-                      const TextSpan(
-                        text: 'Joulephi is a ',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'software engineer',
-                        style: primaryText,
-                      ),
-                      const TextSpan(
-                        text: ' and a ',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'mobile developer',
-                        style: primaryText,
-                      ),
-                    ],
-                  ),
-                ),
-                spaceV(32),
-                AnimatedTextKit(
-                  isRepeatingAnimation: false,
-                  animatedTexts: [
-                    TypewriterAnimatedText(
-                      'He crafts responsive websites where technologies\nmeet creativity',
-                      textStyle: greyText.copyWith(
-                        fontSize: 16,
-                      ),
-                      speed: const Duration(milliseconds: 50),
-                    )
-                  ],
-                ),
-                spaceV(32),
-                Obx(
-                  () => primaryButton(
-                      title: 'Contact me!!',
-                      onHover: (a) {
-                        controller.contactButtonHover.value = a;
-                      },
-                      onTap: () {},
-                      isHover: controller.contactButtonHover.value),
-                )
-              ],
-            ),
-          ),
-          Expanded(
-            child: Container(
-              alignment: Alignment.centerRight,
-              child: Stack(
+            child: StaggeredAnimate(
+              position: 0,
+              direction: Axis.horizontal,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset(
-                    'assets/images/element1.png',
-                    width: 155,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      FadeInImage.assetNetwork(
-                        fadeInDuration: const Duration(milliseconds: 500),
-                        placeholder: 'assets/images/me-half.png',
-                        image: 'assets/images/me-half.png',
-                        width: Get.width * .3,
+                  RichText(
+                    text: TextSpan(
+                      style: whiteText.copyWith(
+                        fontSize: 32,
+                        fontWeight: semiBold,
                       ),
-                      Container(
-                        width: Get.width * .3,
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: grey),
+                      children: [
+                        const TextSpan(
+                          text: 'Joulephi is a ',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
                         ),
-                        child: Wrap(
-                          children: [
-                            Container(
-                              width: 16,
-                              height: 16,
-                              color: primary,
-                            ),
-                            spaceH(10),
-                            Wrap(
-                              children: [
-                                Text(
-                                  'Currently studies at',
-                                  style: greyText.copyWith(fontSize: 16),
-                                ),
-                                spaceH(10),
-                                Text(
-                                  'UNIKOM',
-                                  style: whiteText.copyWith(fontSize: 16),
-                                )
-                              ],
-                            )
-                          ],
+                        TextSpan(
+                          text: 'software engineer',
+                          style: primaryText,
                         ),
+                        const TextSpan(
+                          text: ' and a ',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'mobile developer',
+                          style: primaryText,
+                        ),
+                      ],
+                    ),
+                  ),
+                  spaceV(32),
+                  AnimatedTextKit(
+                    isRepeatingAnimation: false,
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                        'He crafts responsive websites where technologies\nmeet creativity',
+                        textStyle: greyText.copyWith(
+                          fontSize: 16,
+                        ),
+                        speed: const Duration(milliseconds: 50),
                       )
                     ],
                   ),
-                  Positioned(
-                    bottom: 100.0,
-                    right: 20,
-                    child: Image.asset(
-                      'assets/images/dots.png',
-                      width: 84,
-                    ),
-                  ),
+                  spaceV(32),
+                  Obx(
+                    () => primaryButton(
+                        title: 'Contact me!!',
+                        onHover: (a) {
+                          controller.contactButtonHover.value = a;
+                        },
+                        onTap: () {},
+                        isHover: controller.contactButtonHover.value),
+                  )
                 ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: StaggeredAnimate(
+              position: 1,
+              direction: Axis.horizontal,
+              child: Container(
+                alignment: Alignment.centerRight,
+                child: Stack(
+                  children: [
+                    Image.asset(
+                      'assets/images/element1.png',
+                      width: 155,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/me-half.png',
+                          width: Get.width * .3,
+                        ),
+                        Container(
+                          width: Get.width * .3,
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: grey),
+                          ),
+                          child: Wrap(
+                            children: [
+                              Container(
+                                width: 16,
+                                height: 16,
+                                color: primary,
+                              ),
+                              spaceH(10),
+                              Wrap(
+                                children: [
+                                  Text(
+                                    'Currently studies at',
+                                    style: greyText.copyWith(fontSize: 16),
+                                  ),
+                                  spaceH(10),
+                                  Text(
+                                    'UNIKOM',
+                                    style: whiteText.copyWith(fontSize: 16),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                    Positioned(
+                      bottom: 100.0,
+                      right: 20,
+                      child: Image.asset(
+                        'assets/images/dots.png',
+                        width: 84,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           )
