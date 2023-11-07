@@ -59,7 +59,7 @@ class AboutMeView extends GetResponsiveView<AboutMeController> {
                   delay: const Duration(seconds: 1),
                   position: 0,
                   child: SlideAnimation(
-                    horizontalOffset: 100,
+                    horizontalOffset: -100,
                     child: FadeInAnimation(
                       duration: const Duration(seconds: 1),
                       child: Column(
@@ -168,6 +168,7 @@ class AboutMeView extends GetResponsiveView<AboutMeController> {
                 child: StaggeredAnimate(
                   position: 0,
                   direction: Axis.horizontal,
+                  offset: -100,
                   child: SkillCard(
                     title: 'Language',
                     skills: [
@@ -185,6 +186,7 @@ class AboutMeView extends GetResponsiveView<AboutMeController> {
                 child: StaggeredAnimate(
                   position: 1,
                   direction: Axis.horizontal,
+                  offset: -100,
                   child: SkillCard(
                     title: 'Databases',
                     skills: [
@@ -200,7 +202,7 @@ class AboutMeView extends GetResponsiveView<AboutMeController> {
                 flex: 1,
                 child: StaggeredAnimate(
                   position: 2,
-                  direction: Axis.horizontal,
+                  direction: Axis.vertical,
                   child: SkillCard(
                     title: 'Other',
                     skills: [
@@ -443,33 +445,42 @@ class AboutMeView extends GetResponsiveView<AboutMeController> {
               Positioned(
                 right: 90,
                 top: 50,
-                child: Image.asset(
-                  'assets/images/dots.png',
-                  width: 72,
+                child: StaggeredAnimate(
+                  position: 1,
+                  direction: Axis.horizontal,
+                  child: Image.asset(
+                    'assets/images/dots.png',
+                    width: 72,
+                  ),
                 ),
               ),
-              Container(
-                height: 250,
-                decoration: const BoxDecoration(
-                    border: Border(bottom: BorderSide(color: primary)),
-                    image: DecorationImage(
-                      fit: BoxFit.fitHeight,
-                      image: AssetImage(
-                        'assets/images/me-half.png',
-                      ),
-                    )),
-                alignment: Alignment.bottomCenter,
-                // child: Image.asset(
-                //   'assets/images/me-4.png',
-                //   height: 500,
-                // ),
+              StaggeredAnimate(
+                position: 0,
+                direction: Axis.horizontal,
+                child: Container(
+                  height: Get.width,
+                  decoration: const BoxDecoration(
+                      border: Border(bottom: BorderSide(color: primary)),
+                      image: DecorationImage(
+                        fit: BoxFit.fitHeight,
+                        image: AssetImage(
+                          'assets/images/me-half.png',
+                        ),
+                      )),
+                  alignment: Alignment.bottomCenter,
+                ),
               ),
               Positioned(
                 left: 20,
                 bottom: 10,
-                child: Image.asset(
-                  'assets/images/dots.png',
-                  width: 72,
+                child: StaggeredAnimate(
+                  position: 2,
+                  direction: Axis.horizontal,
+                  offset: -100,
+                  child: Image.asset(
+                    'assets/images/dots.png',
+                    width: 72,
+                  ),
                 ),
               ),
             ],
@@ -516,65 +527,103 @@ class AboutMeView extends GetResponsiveView<AboutMeController> {
             children: [
               Flexible(
                 flex: 1,
-                child: Column(
-                  children: [
-                    SkillCard(
-                      title: 'Language',
-                      skills: [
-                        'C++',
-                        'Python',
-                        'Dart',
-                        'PHP',
-                        'Javascript',
-                      ],
-                    ),
-                    SkillCard(
-                      title: 'Databases',
-                      skills: [
-                        'MySQL',
-                        'MongoDB',
-                        'Redis',
-                        'Firebase',
-                      ],
-                    ),
-                    SkillCard(
-                      title: 'Other',
-                      skills: [
-                        'HTML',
-                        'CSS',
-                        'REST',
-                      ],
-                    ),
-                  ],
+                child: StaggeredAnimate(
+                  position: 0,
+                  direction: Axis.vertical,
+                  child: Column(
+                    children: [
+                      StaggeredAnimate(
+                        position: 0,
+                        direction: Axis.vertical,
+                        duration: Duration(seconds: 2),
+                        delay: Duration(seconds: 1),
+                        child: SkillCard(
+                          title: 'Language',
+                          skills: [
+                            'C++',
+                            'Python',
+                            'Dart',
+                            'PHP',
+                            'Javascript',
+                          ],
+                        ),
+                      ),
+                      StaggeredAnimate(
+                        position: 1,
+                        direction: Axis.vertical,
+                        duration: Duration(seconds: 2),
+                        delay: Duration(seconds: 1),
+                        child: SkillCard(
+                          title: 'Databases',
+                          skills: [
+                            'MySQL',
+                            'MongoDB',
+                            'Redis',
+                            'Firebase',
+                          ],
+                        ),
+                      ),
+                      StaggeredAnimate(
+                        position: 2,
+                        direction: Axis.vertical,
+                        duration: Duration(seconds: 2),
+                        delay: Duration(seconds: 1),
+                        child: SkillCard(
+                          title: 'Other',
+                          skills: [
+                            'HTML',
+                            'CSS',
+                            'REST',
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Flexible(
                   flex: 1,
-                  child: Column(
-                    children: [
-                      SkillCard(
-                        title: 'Tools',
-                        skills: [
-                          'VSCode',
-                          'Figma',
-                          'Postman',
-                          'Laragon',
-                          'Git',
-                          'Linux'
-                        ],
-                      ),
-                      SkillCard(
-                        title: 'Frameworks',
-                        skills: [
-                          'Flutter',
-                          'Laravel',
-                          'Vue JS',
-                          'Inertia JS',
-                          'Arduino',
-                          'Tailwind'
-                        ],
-                      ),
-                    ],
+                  child: StaggeredAnimate(
+                    position: 1,
+                    direction: Axis.vertical,
+                    child: Column(
+                      children: [
+                        StaggeredAnimate(
+                          position: 0,
+                          direction: Axis.vertical,
+                          duration: Duration(seconds: 2),
+                          delay: Duration(seconds: 1),
+                          child: SkillCard(
+                            title: 'Tools',
+                            skills: [
+                              'VSCode',
+                              'Figma',
+                              'Postman',
+                              'Laragon',
+                              'Git',
+                              'Linux'
+                            ],
+                          ),
+                        ),
+                        StaggeredAnimate(
+                          position: 1,
+                          direction: Axis.vertical,
+                          duration: Duration(seconds: 2),
+                          delay: Duration(seconds: 1),
+                          child: SkillCard(
+                            title: 'Frameworks',
+                            skills: [
+                              'Flutter',
+                              'Laravel',
+                              'Vue JS',
+                              'Inertia JS',
+                              'Arduino',
+                              'Tailwind'
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   )),
             ],
           ),
@@ -603,9 +652,17 @@ class AboutMeView extends GetResponsiveView<AboutMeController> {
             spacing: 8,
             alignment: WrapAlignment.start,
             children: controller.experiences
-                .map((e) => ExperienceCard(
+                .map(
+                  (e) => StaggeredAnimate(
+                    position: controller.experiences.indexOf(e),
+                    direction: Axis.horizontal,
+                    duration: const Duration(seconds: 2),
+                    delay: const Duration(milliseconds: 500),
+                    child: ExperienceCard(
                       experience: e,
-                    ))
+                    ),
+                  ),
+                )
                 .toList(),
           ),
           spaceV(32),

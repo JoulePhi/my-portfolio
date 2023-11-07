@@ -5,6 +5,7 @@ import 'package:portfolio/app/shared/utils.dart';
 import 'package:portfolio/app/widgets/drawer_phone.dart';
 import 'package:portfolio/app/widgets/message_card.dart';
 import 'package:portfolio/app/widgets/navbar.dart';
+import 'package:portfolio/app/widgets/staggered_animation.dart';
 
 import '../controllers/contacts_controller.dart';
 
@@ -51,54 +52,64 @@ class ContactsView extends GetResponsiveView<ContactsController> {
             children: [
               Flexible(
                 flex: 4,
-                child: Text(
-                  'I’m interested in freelance opportunities. However, if you have other request or question, don’t hesitate to contact me',
-                  style: greyText.copyWith(
-                    fontSize: 16,
-                    fontWeight: medium,
+                child: StaggeredAnimate(
+                  position: 0,
+                  direction: Axis.horizontal,
+                  offset: -100,
+                  child: Text(
+                    'I’m interested in freelance opportunities. However, if you have other request or question, don’t hesitate to contact me',
+                    style: greyText.copyWith(
+                      fontSize: 16,
+                      fontWeight: medium,
+                    ),
+                    overflow: TextOverflow.clip,
                   ),
-                  overflow: TextOverflow.clip,
                 ),
               ),
               Flexible(
                 flex: 5,
-                child: Wrap(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                          color: grey,
-                        )),
-                        child: FittedBox(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Message me here',
-                                style: whiteText.copyWith(
-                                    fontSize: 16, fontWeight: semiBold),
-                              ),
-                              spaceV(16),
-                              const MessageCard(
-                                  icon: 'assets/images/email.png',
-                                  contacts: 'dzulfikar.sadid.khoir@gmail.com'),
-                              spaceV(16),
-                              const MessageCard(
-                                  icon: 'assets/images/whatsapp.png',
-                                  contacts: '+62 813-2008-2893'),
-                              spaceV(16),
-                              const MessageCard(
-                                  icon: 'assets/images/instagram.png',
-                                  contacts: '@joulephi'),
-                            ],
+                child: StaggeredAnimate(
+                  position: 1,
+                  direction: Axis.horizontal,
+                  child: Wrap(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                            color: grey,
+                          )),
+                          child: FittedBox(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Message me here',
+                                  style: whiteText.copyWith(
+                                      fontSize: 16, fontWeight: semiBold),
+                                ),
+                                spaceV(16),
+                                const MessageCard(
+                                    icon: 'assets/images/email.png',
+                                    contacts:
+                                        'dzulfikar.sadid.khoir@gmail.com'),
+                                spaceV(16),
+                                const MessageCard(
+                                    icon: 'assets/images/whatsapp.png',
+                                    contacts: '+62 813-2008-2893'),
+                                spaceV(16),
+                                const MessageCard(
+                                    icon: 'assets/images/instagram.png',
+                                    contacts: '@joulephi'),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               )
             ],
@@ -131,34 +142,43 @@ class ContactsView extends GetResponsiveView<ContactsController> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: grey),
-                        ),
-                        child: TextField(
-                          style: whiteText.copyWith(fontSize: 16),
-                          cursorColor: grey,
-                          decoration: InputDecoration.collapsed(
-                            hintText: 'Name',
-                            hintStyle: greyText.copyWith(fontSize: 16),
+                      child: StaggeredAnimate(
+                        position: 0,
+                        direction: Axis.horizontal,
+                        offset: -100,
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: grey),
+                          ),
+                          child: TextField(
+                            style: whiteText.copyWith(fontSize: 16),
+                            cursorColor: grey,
+                            decoration: InputDecoration.collapsed(
+                              hintText: 'Name',
+                              hintStyle: greyText.copyWith(fontSize: 16),
+                            ),
                           ),
                         ),
                       ),
                     ),
                     spaceH(16),
                     Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: grey),
-                        ),
-                        child: TextField(
-                          style: whiteText.copyWith(fontSize: 16),
-                          cursorColor: grey,
-                          decoration: InputDecoration.collapsed(
-                            hintText: 'Email',
-                            hintStyle: greyText.copyWith(fontSize: 16),
+                      child: StaggeredAnimate(
+                        position: 1,
+                        direction: Axis.horizontal,
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: grey),
+                          ),
+                          child: TextField(
+                            style: whiteText.copyWith(fontSize: 16),
+                            cursorColor: grey,
+                            decoration: InputDecoration.collapsed(
+                              hintText: 'Email',
+                              hintStyle: greyText.copyWith(fontSize: 16),
+                            ),
                           ),
                         ),
                       ),
@@ -172,43 +192,51 @@ class ContactsView extends GetResponsiveView<ContactsController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: grey),
-                      ),
-                      child: TextField(
-                        style: whiteText.copyWith(fontSize: 16),
-                        cursorColor: grey,
-                        maxLines: 8,
-                        decoration: InputDecoration.collapsed(
-                          hintText: 'Message',
-                          hintStyle: greyText.copyWith(fontSize: 16),
+                    StaggeredAnimate(
+                      position: 0,
+                      direction: Axis.vertical,
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: grey),
+                        ),
+                        child: TextField(
+                          style: whiteText.copyWith(fontSize: 16),
+                          cursorColor: grey,
+                          maxLines: 8,
+                          decoration: InputDecoration.collapsed(
+                            hintText: 'Message',
+                            hintStyle: greyText.copyWith(fontSize: 16),
+                          ),
                         ),
                       ),
                     ),
                     spaceV(16),
-                    Obx(
-                      () => InkWell(
-                        onTap: () {},
-                        onHover: (a) {
-                          controller.sendHover.value = a;
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: primary),
-                            color: controller.sendHover.value
-                                ? primary.withOpacity(.2)
-                                : Colors.transparent,
-                          ),
-                          child: Text(
-                            'Send',
-                            style: whiteText.copyWith(
-                              fontSize: 16,
-                              fontWeight: medium,
+                    StaggeredAnimate(
+                      position: 1,
+                      direction: Axis.vertical,
+                      child: Obx(
+                        () => InkWell(
+                          onTap: () {},
+                          onHover: (a) {
+                            controller.sendHover.value = a;
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: primary),
+                              color: controller.sendHover.value
+                                  ? primary.withOpacity(.2)
+                                  : Colors.transparent,
+                            ),
+                            child: Text(
+                              'Send',
+                              style: whiteText.copyWith(
+                                fontSize: 16,
+                                fontWeight: medium,
+                              ),
                             ),
                           ),
                         ),
@@ -301,49 +329,82 @@ class ContactsView extends GetResponsiveView<ContactsController> {
             ),
           ),
           spaceV(36),
-          Text(
-            'I’m interested in freelance opportunities. However, if you have other request or question, don’t hesitate to contact me',
-            style: greyText.copyWith(
-              fontSize: 16,
-              fontWeight: medium,
+          RichText(
+            text: TextSpan(
+              text: '#',
+              style: primaryText.copyWith(
+                fontSize: 24,
+                fontWeight: medium,
+              ),
+              children: <TextSpan>[
+                TextSpan(
+                  text: 'contacts',
+                  style: whiteText.copyWith(
+                    fontSize: 24,
+                    fontWeight: medium,
+                  ),
+                ),
+              ],
             ),
-            overflow: TextOverflow.clip,
           ),
           spaceV(32),
-          Wrap(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                    color: grey,
-                  )),
-                  child: FittedBox(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Message me here',
-                          style: whiteText.copyWith(
-                              fontSize: 16, fontWeight: semiBold),
-                        ),
-                        spaceV(16),
-                        const MessageCard(
-                            icon: 'assets/images/email.png',
-                            contacts: 'dzulfikar.sadid.khoir@gmail.com'),
-                        spaceV(16),
-                        const MessageCard(
-                            icon: 'assets/images/whatsapp.png',
-                            contacts: '+62 813-2008-2893'),
-                        spaceV(16),
-                        const MessageCard(
-                            icon: 'assets/images/instagram.png',
-                            contacts: '@joulephi'),
-                      ],
-                    ),
+              StaggeredAnimate(
+                position: 0,
+                direction: Axis.horizontal,
+                offset: -100,
+                child: Text(
+                  'I’m interested in freelance opportunities. However, if you have other request or question, don’t hesitate to contact me',
+                  style: greyText.copyWith(
+                    fontSize: 16,
+                    fontWeight: medium,
                   ),
+                  overflow: TextOverflow.clip,
+                ),
+              ),
+              spaceV(32),
+              StaggeredAnimate(
+                position: 1,
+                direction: Axis.horizontal,
+                child: Wrap(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                          color: grey,
+                        )),
+                        child: FittedBox(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Message me here',
+                                style: whiteText.copyWith(
+                                    fontSize: 16, fontWeight: semiBold),
+                              ),
+                              spaceV(16),
+                              const MessageCard(
+                                  icon: 'assets/images/email.png',
+                                  contacts: 'dzulfikar.sadid.khoir@gmail.com'),
+                              spaceV(16),
+                              const MessageCard(
+                                  icon: 'assets/images/whatsapp.png',
+                                  contacts: '+62 813-2008-2893'),
+                              spaceV(16),
+                              const MessageCard(
+                                  icon: 'assets/images/instagram.png',
+                                  contacts: '@joulephi'),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
@@ -376,34 +437,43 @@ class ContactsView extends GetResponsiveView<ContactsController> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: grey),
-                        ),
-                        child: TextField(
-                          style: whiteText.copyWith(fontSize: 16),
-                          cursorColor: grey,
-                          decoration: InputDecoration.collapsed(
-                            hintText: 'Name',
-                            hintStyle: greyText.copyWith(fontSize: 16),
+                      child: StaggeredAnimate(
+                        position: 0,
+                        direction: Axis.horizontal,
+                        offset: -100,
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: grey),
+                          ),
+                          child: TextField(
+                            style: whiteText.copyWith(fontSize: 16),
+                            cursorColor: grey,
+                            decoration: InputDecoration.collapsed(
+                              hintText: 'Name',
+                              hintStyle: greyText.copyWith(fontSize: 16),
+                            ),
                           ),
                         ),
                       ),
                     ),
                     spaceH(16),
                     Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: grey),
-                        ),
-                        child: TextField(
-                          style: whiteText.copyWith(fontSize: 16),
-                          cursorColor: grey,
-                          decoration: InputDecoration.collapsed(
-                            hintText: 'Email',
-                            hintStyle: greyText.copyWith(fontSize: 16),
+                      child: StaggeredAnimate(
+                        position: 1,
+                        direction: Axis.horizontal,
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: grey),
+                          ),
+                          child: TextField(
+                            style: whiteText.copyWith(fontSize: 16),
+                            cursorColor: grey,
+                            decoration: InputDecoration.collapsed(
+                              hintText: 'Email',
+                              hintStyle: greyText.copyWith(fontSize: 16),
+                            ),
                           ),
                         ),
                       ),
@@ -417,43 +487,51 @@ class ContactsView extends GetResponsiveView<ContactsController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: grey),
-                      ),
-                      child: TextField(
-                        style: whiteText.copyWith(fontSize: 16),
-                        cursorColor: grey,
-                        maxLines: 8,
-                        decoration: InputDecoration.collapsed(
-                          hintText: 'Message',
-                          hintStyle: greyText.copyWith(fontSize: 16),
+                    StaggeredAnimate(
+                      position: 0,
+                      direction: Axis.vertical,
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: grey),
+                        ),
+                        child: TextField(
+                          style: whiteText.copyWith(fontSize: 16),
+                          cursorColor: grey,
+                          maxLines: 8,
+                          decoration: InputDecoration.collapsed(
+                            hintText: 'Message',
+                            hintStyle: greyText.copyWith(fontSize: 16),
+                          ),
                         ),
                       ),
                     ),
                     spaceV(16),
-                    Obx(
-                      () => InkWell(
-                        onTap: () {},
-                        onHover: (a) {
-                          controller.sendHover.value = a;
-                        },
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 200),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: primary),
-                            color: controller.sendHover.value
-                                ? primary.withOpacity(.2)
-                                : Colors.transparent,
-                          ),
-                          child: Text(
-                            'Send',
-                            style: whiteText.copyWith(
-                              fontSize: 16,
-                              fontWeight: medium,
+                    StaggeredAnimate(
+                      position: 1,
+                      direction: Axis.vertical,
+                      child: Obx(
+                        () => InkWell(
+                          onTap: () {},
+                          onHover: (a) {
+                            controller.sendHover.value = a;
+                          },
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 200),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: primary),
+                              color: controller.sendHover.value
+                                  ? primary.withOpacity(.2)
+                                  : Colors.transparent,
+                            ),
+                            child: Text(
+                              'Send',
+                              style: whiteText.copyWith(
+                                fontSize: 16,
+                                fontWeight: medium,
+                              ),
                             ),
                           ),
                         ),

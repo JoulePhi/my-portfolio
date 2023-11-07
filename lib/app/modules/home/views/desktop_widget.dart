@@ -20,54 +20,63 @@ class ContactBox extends StatelessWidget {
       children: [
         Flexible(
           flex: 4,
-          child: Text(
-            'I’m interested in freelance opportunities. However, if you have other request or question, don’t hesitate to contact me',
-            style: greyText.copyWith(
-              fontSize: 16,
-              fontWeight: medium,
+          child: StaggeredAnimate(
+            position: 0,
+            direction: Axis.horizontal,
+            offset: -100,
+            child: Text(
+              'I’m interested in freelance opportunities. However, if you have other request or question, don’t hesitate to contact me',
+              style: greyText.copyWith(
+                fontSize: 16,
+                fontWeight: medium,
+              ),
+              overflow: TextOverflow.clip,
             ),
-            overflow: TextOverflow.clip,
           ),
         ),
         Flexible(
           flex: 5,
-          child: Wrap(
-            children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                    color: grey,
-                  )),
-                  child: FittedBox(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Message me here',
-                          style: whiteText.copyWith(
-                              fontSize: 16, fontWeight: semiBold),
-                        ),
-                        spaceV(16),
-                        const MessageCard(
-                            icon: 'assets/images/email.png',
-                            contacts: 'dzulfikar.sadid.khoir@gmail.com'),
-                        spaceV(16),
-                        const MessageCard(
-                            icon: 'assets/images/whatsapp.png',
-                            contacts: '+62 813-2008-2893'),
-                        spaceV(16),
-                        const MessageCard(
-                            icon: 'assets/images/instagram.png',
-                            contacts: '@joulephi'),
-                      ],
+          child: StaggeredAnimate(
+            position: 1,
+            direction: Axis.horizontal,
+            child: Wrap(
+              children: [
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                      color: grey,
+                    )),
+                    child: FittedBox(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Message me here',
+                            style: whiteText.copyWith(
+                                fontSize: 16, fontWeight: semiBold),
+                          ),
+                          spaceV(16),
+                          const MessageCard(
+                              icon: 'assets/images/email.png',
+                              contacts: 'dzulfikar.sadid.khoir@gmail.com'),
+                          spaceV(16),
+                          const MessageCard(
+                              icon: 'assets/images/whatsapp.png',
+                              contacts: '+62 813-2008-2893'),
+                          spaceV(16),
+                          const MessageCard(
+                              icon: 'assets/images/instagram.png',
+                              contacts: '@joulephi'),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         )
       ],
@@ -160,22 +169,32 @@ class AboutMe extends StatelessWidget {
                 ],
               ),
               spaceV(25),
-              Text('Hello, I\'m JoulePhi!',
-                  style: greyText.copyWith(fontSize: 16)),
-              spaceV(16),
-              Text(
-                'I’m a self-taught front-end developer based in Kyiv, Ukraine. '
-                'I can develop responsive websites from scratch and raise them '
-                'into modern user-friendly web experiences.',
-                style: greyText.copyWith(fontSize: 16),
-              ),
-              spaceV(16),
-              Text(
-                'Transforming my creativity and knowledge into websites has been my '
-                'passion for over a year. I have been helping various clients to '
-                'establish their presence online. I always strive to learn about the '
-                'newest technologies and frameworks.',
-                style: greyText.copyWith(fontSize: 16),
+              StaggeredAnimate(
+                position: 0,
+                direction: Axis.horizontal,
+                offset: -100,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Hello, I\'m JoulePhi!',
+                        style: greyText.copyWith(fontSize: 16)),
+                    spaceV(16),
+                    Text(
+                      'I’m a self-taught front-end developer based in Kyiv, Ukraine. '
+                      'I can develop responsive websites from scratch and raise them '
+                      'into modern user-friendly web experiences.',
+                      style: greyText.copyWith(fontSize: 16),
+                    ),
+                    spaceV(16),
+                    Text(
+                      'Transforming my creativity and knowledge into websites has been my '
+                      'passion for over a year. I have been helping various clients to '
+                      'establish their presence online. I always strive to learn about the '
+                      'newest technologies and frameworks.',
+                      style: greyText.copyWith(fontSize: 16),
+                    ),
+                  ],
+                ),
               ),
               spaceV(25),
               Obx(
@@ -194,41 +213,60 @@ class AboutMe extends StatelessWidget {
         ),
         Flexible(
           flex: 4,
-          child: Stack(
-            children: [
-              Positioned(
-                right: 90,
-                top: 120,
-                child: Image.asset(
-                  'assets/images/dots.png',
-                  width: 84,
+          child: StaggeredAnimate(
+            position: 1,
+            direction: Axis.horizontal,
+            child: Stack(
+              children: [
+                Positioned(
+                  right: 90,
+                  top: 120,
+                  child: StaggeredAnimate(
+                    position: 0,
+                    direction: Axis.horizontal,
+                    duration: const Duration(seconds: 2),
+                    child: Image.asset(
+                      'assets/images/dots.png',
+                      width: 84,
+                    ),
+                  ),
                 ),
-              ),
-              Container(
-                height: 500,
-                decoration: const BoxDecoration(
-                    border: Border(bottom: BorderSide(color: primary)),
-                    image: DecorationImage(
-                      fit: BoxFit.fitHeight,
-                      image: AssetImage(
-                        'assets/images/me-4.png',
-                      ),
-                    )),
-                alignment: Alignment.bottomCenter,
-                // child: Image.asset(
-                //   'assets/images/me-4.png',
-                //   height: 500,
-                // ),
-              ),
-              Positioned(
-                left: 40,
-                bottom: 10,
-                child: Image.asset(
-                  'assets/images/dots.png',
-                  width: 84,
+                StaggeredAnimate(
+                  position: 2,
+                  direction: Axis.vertical,
+                  duration: const Duration(seconds: 2),
+                  child: Container(
+                    height: 500,
+                    decoration: const BoxDecoration(
+                        border: Border(bottom: BorderSide(color: primary)),
+                        image: DecorationImage(
+                          fit: BoxFit.fitHeight,
+                          image: AssetImage(
+                            'assets/images/me-4.png',
+                          ),
+                        )),
+                    alignment: Alignment.bottomCenter,
+                    // child: Image.asset(
+                    //   'assets/images/me-4.png',
+                    //   height: 500,
+                    // ),
+                  ),
                 ),
-              ),
-            ],
+                Positioned(
+                  left: 40,
+                  bottom: 10,
+                  child: StaggeredAnimate(
+                    position: 1,
+                    direction: Axis.horizontal,
+                    offset: -100,
+                    child: Image.asset(
+                      'assets/images/dots.png',
+                      width: 84,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         )
       ],
@@ -549,12 +587,18 @@ class Quote extends StatelessWidget {
                   decoration: BoxDecoration(
                     border: Border.all(color: grey),
                   ),
-                  child: Text(
-                    'With great power comes great electricity bill',
-                    style: whiteText.copyWith(
-                      fontSize: 24,
-                      fontWeight: medium,
-                    ),
+                  child: AnimatedTextKit(
+                    isRepeatingAnimation: false,
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                        'Knowledge is the light that dissipates the darkness',
+                        textStyle: whiteText.copyWith(
+                          fontSize: 24,
+                          fontWeight: medium,
+                        ),
+                        speed: const Duration(milliseconds: 50),
+                      )
+                    ],
                   ),
                 ),
                 Positioned(
@@ -577,7 +621,7 @@ class Quote extends StatelessWidget {
                 border: Border.all(color: grey),
               ),
               child: Text(
-                '- Dr. Who',
+                '- Avicenna',
                 style: whiteText.copyWith(
                   fontSize: 24,
                 ),
@@ -610,6 +654,7 @@ class BannerTop extends StatelessWidget {
             child: StaggeredAnimate(
               position: 0,
               direction: Axis.horizontal,
+              offset: -100,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -678,56 +723,71 @@ class BannerTop extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: Stack(
                   children: [
-                    Image.asset(
-                      'assets/images/element1.png',
-                      width: 155,
+                    StaggeredAnimate(
+                      position: 1,
+                      duration: const Duration(seconds: 2),
+                      direction: Axis.horizontal,
+                      offset: -100,
+                      child: Image.asset(
+                        'assets/images/element1.png',
+                        width: 155,
+                      ),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/me-half.png',
-                          width: Get.width * .3,
-                        ),
-                        Container(
-                          width: Get.width * .3,
-                          padding: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: grey),
+                    StaggeredAnimate(
+                      position: 0,
+                      direction: Axis.horizontal,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            'assets/images/me-half.png',
+                            width: Get.width * .3,
                           ),
-                          child: Wrap(
-                            children: [
-                              Container(
-                                width: 16,
-                                height: 16,
-                                color: primary,
-                              ),
-                              spaceH(10),
-                              Wrap(
-                                children: [
-                                  Text(
-                                    'Currently studies at',
-                                    style: greyText.copyWith(fontSize: 16),
-                                  ),
-                                  spaceH(10),
-                                  Text(
-                                    'UNIKOM',
-                                    style: whiteText.copyWith(fontSize: 16),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        )
-                      ],
+                          Container(
+                            width: Get.width * .3,
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: grey),
+                            ),
+                            child: Wrap(
+                              children: [
+                                Container(
+                                  width: 16,
+                                  height: 16,
+                                  color: primary,
+                                ),
+                                spaceH(10),
+                                Wrap(
+                                  children: [
+                                    Text(
+                                      'Currently studies at',
+                                      style: greyText.copyWith(fontSize: 16),
+                                    ),
+                                    spaceH(10),
+                                    Text(
+                                      'UNIKOM',
+                                      style: whiteText.copyWith(fontSize: 16),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     Positioned(
                       bottom: 100.0,
                       right: 20,
-                      child: Image.asset(
-                        'assets/images/dots.png',
-                        width: 84,
+                      child: StaggeredAnimate(
+                        position: 2,
+                        duration: const Duration(seconds: 2),
+                        direction: Axis.horizontal,
+                        child: Image.asset(
+                          'assets/images/dots.png',
+                          width: 84,
+                        ),
                       ),
                     ),
                   ],

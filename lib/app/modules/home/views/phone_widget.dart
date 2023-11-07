@@ -6,6 +6,7 @@ import 'package:portfolio/app/shared/utils.dart';
 import 'package:portfolio/app/widgets/message_card.dart';
 import 'package:portfolio/app/widgets/project_card.dart';
 import 'package:portfolio/app/widgets/skill_card.dart';
+import 'package:portfolio/app/widgets/staggered_animation.dart';
 
 class BannerPhone extends StatelessWidget {
   const BannerPhone({
@@ -69,55 +70,77 @@ class BannerPhone extends StatelessWidget {
               Positioned(
                 left: 20,
                 top: 80,
-                child: Image.asset(
-                  'assets/images/element1.png',
-                  width: 120,
+                child: StaggeredAnimate(
+                  position: 1,
+                  direction: Axis.horizontal,
+                  offset: -100,
+                  child: Image.asset(
+                    'assets/images/element1.png',
+                    width: 120,
+                  ),
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  FadeInImage.assetNetwork(
-                    fadeInDuration: const Duration(milliseconds: 500),
-                    placeholder: 'assets/images/me-half.png',
-                    image: 'assets/images/me-half.png',
-                    width: double.infinity,
-                  ),
-                  Container(
-                    width: Get.width,
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: grey),
+              StaggeredAnimate(
+                position: 0,
+                direction: Axis.horizontal,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    StaggeredAnimate(
+                      position: 0,
+                      direction: Axis.horizontal,
+                      duration: const Duration(seconds: 2),
+                      child: Image.asset(
+                        'assets/images/me-half.png',
+                        width: double.infinity,
+                      ),
                     ),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 16,
-                          height: 16,
-                          color: primary,
+                    StaggeredAnimate(
+                      position: 1,
+                      direction: Axis.horizontal,
+                      offset: -100,
+                      duration: const Duration(seconds: 2),
+                      child: Container(
+                        width: Get.width,
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: grey),
                         ),
-                        spaceH(10),
-                        Text(
-                          'Currently studies at',
-                          style: greyText.copyWith(fontSize: 16),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 16,
+                              height: 16,
+                              color: primary,
+                            ),
+                            spaceH(10),
+                            Text(
+                              'Currently studies at',
+                              style: greyText.copyWith(fontSize: 16),
+                            ),
+                            spaceH(10),
+                            Text(
+                              'UNIKOM',
+                              style: whiteText.copyWith(fontSize: 16),
+                            )
+                          ],
                         ),
-                        spaceH(10),
-                        Text(
-                          'UNIKOM',
-                          style: whiteText.copyWith(fontSize: 16),
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                      ),
+                    )
+                  ],
+                ),
               ),
               Positioned(
                 bottom: 100.0,
                 right: 20,
-                child: Image.asset(
-                  'assets/images/dots.png',
-                  width: 84,
+                child: StaggeredAnimate(
+                  position: 2,
+                  direction: Axis.horizontal,
+                  child: Image.asset(
+                    'assets/images/dots.png',
+                    width: 84,
+                  ),
                 ),
               ),
             ],
@@ -148,12 +171,18 @@ class QuotePhone extends StatelessWidget {
                   decoration: BoxDecoration(
                     border: Border.all(color: grey),
                   ),
-                  child: Text(
-                    'With great power comes great electricity bill',
-                    style: whiteText.copyWith(
-                      fontSize: 18,
-                      fontWeight: medium,
-                    ),
+                  child: AnimatedTextKit(
+                    isRepeatingAnimation: false,
+                    animatedTexts: [
+                      TypewriterAnimatedText(
+                        'Knowledge is the light that dissipates the darkness',
+                        textStyle: whiteText.copyWith(
+                          fontSize: 18,
+                          fontWeight: medium,
+                        ),
+                        speed: const Duration(milliseconds: 50),
+                      )
+                    ],
                   ),
                 ),
                 Container(
@@ -162,12 +191,12 @@ class QuotePhone extends StatelessWidget {
                     border: Border.all(color: grey),
                   ),
                   child: Text(
-                    '- Dr. Who',
+                    '- Avicenna',
                     style: whiteText.copyWith(
                       fontSize: 18,
                     ),
                   ),
-                ),
+                )
               ],
             ),
           ],
@@ -243,9 +272,25 @@ class ProjectsPhone extends StatelessWidget {
           ],
         ),
         spaceV(32),
-        const ProjectcardPhone(),
-        const ProjectcardPhone(),
-        const ProjectcardPhone(),
+        const StaggeredAnimate(
+          position: 0,
+          direction: Axis.horizontal,
+          duration: Duration(seconds: 2),
+          child: ProjectcardPhone(),
+        ),
+        const StaggeredAnimate(
+          position: 1,
+          offset: -100,
+          direction: Axis.horizontal,
+          duration: Duration(seconds: 2),
+          child: ProjectcardPhone(),
+        ),
+        const StaggeredAnimate(
+          position: 2,
+          direction: Axis.horizontal,
+          duration: Duration(seconds: 2),
+          child: ProjectcardPhone(),
+        ),
       ],
     );
   }
@@ -294,65 +339,103 @@ class SkillsElementPhone extends StatelessWidget {
           children: [
             Flexible(
               flex: 1,
-              child: Column(
-                children: [
-                  SkillCard(
-                    title: 'Language',
-                    skills: [
-                      'C++',
-                      'Python',
-                      'Dart',
-                      'PHP',
-                      'Javascript',
-                    ],
-                  ),
-                  SkillCard(
-                    title: 'Databases',
-                    skills: [
-                      'MySQL',
-                      'MongoDB',
-                      'Redis',
-                      'Firebase',
-                    ],
-                  ),
-                  SkillCard(
-                    title: 'Other',
-                    skills: [
-                      'HTML',
-                      'CSS',
-                      'REST',
-                    ],
-                  ),
-                ],
+              child: StaggeredAnimate(
+                position: 0,
+                direction: Axis.vertical,
+                child: Column(
+                  children: [
+                    StaggeredAnimate(
+                      position: 0,
+                      direction: Axis.vertical,
+                      duration: Duration(seconds: 2),
+                      delay: Duration(seconds: 1),
+                      child: SkillCard(
+                        title: 'Language',
+                        skills: [
+                          'C++',
+                          'Python',
+                          'Dart',
+                          'PHP',
+                          'Javascript',
+                        ],
+                      ),
+                    ),
+                    StaggeredAnimate(
+                      position: 1,
+                      direction: Axis.vertical,
+                      duration: Duration(seconds: 2),
+                      delay: Duration(seconds: 1),
+                      child: SkillCard(
+                        title: 'Databases',
+                        skills: [
+                          'MySQL',
+                          'MongoDB',
+                          'Redis',
+                          'Firebase',
+                        ],
+                      ),
+                    ),
+                    StaggeredAnimate(
+                      position: 2,
+                      direction: Axis.vertical,
+                      duration: Duration(seconds: 2),
+                      delay: Duration(seconds: 1),
+                      child: SkillCard(
+                        title: 'Other',
+                        skills: [
+                          'HTML',
+                          'CSS',
+                          'REST',
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Flexible(
               flex: 1,
-              child: Column(
-                children: [
-                  SkillCard(
-                    title: 'Tools',
-                    skills: [
-                      'VSCode',
-                      'Figma',
-                      'Postman',
-                      'Laragon',
-                      'Git',
-                      'Linux'
-                    ],
-                  ),
-                  SkillCard(
-                    title: 'Frameworks',
-                    skills: [
-                      'Flutter',
-                      'Laravel',
-                      'Vue JS',
-                      'Inertia JS',
-                      'Arduino',
-                      'Tailwind'
-                    ],
-                  ),
-                ],
+              child: StaggeredAnimate(
+                position: 1,
+                direction: Axis.vertical,
+                child: Column(
+                  children: [
+                    StaggeredAnimate(
+                      position: 0,
+                      direction: Axis.vertical,
+                      duration: Duration(seconds: 2),
+                      delay: Duration(seconds: 1),
+                      child: SkillCard(
+                        title: 'Tools',
+                        skills: [
+                          'VSCode',
+                          'Figma',
+                          'Postman',
+                          'Laragon',
+                          'Git',
+                          'Linux'
+                        ],
+                      ),
+                    ),
+                    StaggeredAnimate(
+                      position: 1,
+                      direction: Axis.vertical,
+                      duration: Duration(seconds: 2),
+                      delay: Duration(seconds: 1),
+                      child: SkillCard(
+                        title: 'Frameworks',
+                        skills: [
+                          'Flutter',
+                          'Laravel',
+                          'Vue JS',
+                          'Inertia JS',
+                          'Arduino',
+                          'Tailwind'
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -398,23 +481,42 @@ class AboutMePhone extends StatelessWidget {
             )
           ],
         ),
-        spaceV(16),
-        Text('Hello, I\'m JoulePhi!', style: greyText.copyWith(fontSize: 16)),
-        spaceV(16),
-        Text(
-          "I'm a self-taught front-end developer based in Kyiv, Ukraine. I can develop responsive websites from scratch and raise them into modern user-friendly web experiences.",
-          style: greyText.copyWith(fontSize: 16),
-          textAlign: TextAlign.left,
+        StaggeredAnimate(
+          position: 0,
+          direction: Axis.horizontal,
+          duration: const Duration(seconds: 2),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              spaceV(16),
+              Text('Hello, I\'m JoulePhi!',
+                  style: greyText.copyWith(fontSize: 16)),
+              spaceV(16),
+              Text(
+                "I'm a self-taught front-end developer based in Kyiv, Ukraine. I can develop responsive websites from scratch and raise them into modern user-friendly web experiences.",
+                style: greyText.copyWith(fontSize: 16),
+                textAlign: TextAlign.left,
+              ),
+              spaceV(16),
+            ],
+          ),
         ),
-        spaceV(16),
-        Obx(
-          () => primaryButton(
-              title: 'Read more ->',
-              onHover: (a) {
-                controller.readMoreButtonHover.value = a;
-              },
-              onTap: () {},
-              isHover: controller.readMoreButtonHover.value),
+        StaggeredAnimate(
+          position: 1,
+          direction: Axis.horizontal,
+          duration: const Duration(seconds: 2),
+          offset: -100,
+          child: Obx(
+            () => primaryButton(
+                title: 'Read more ->',
+                onHover: (a) {
+                  controller.readMoreButtonHover.value = a;
+                },
+                onTap: () {
+                  Get.offAllNamed('/about-me');
+                },
+                isHover: controller.readMoreButtonHover.value),
+          ),
         )
       ],
     );
@@ -457,41 +559,54 @@ class ContactsPhone extends StatelessWidget {
           ],
         ),
         spaceV(16),
-        Text(
-          'I’m interested in freelance opportunities. However, if you have other request or question, don’t hesitate to contact me',
-          style: greyText.copyWith(
-            fontSize: 16,
-            fontWeight: medium,
+        StaggeredAnimate(
+          position: 0,
+          direction: Axis.horizontal,
+          duration: const Duration(seconds: 2),
+          child: Text(
+            'I’m interested in freelance opportunities. However, if you have other request or question, don’t hesitate to contact me',
+            style: greyText.copyWith(
+              fontSize: 16,
+              fontWeight: medium,
+            ),
+            overflow: TextOverflow.clip,
           ),
-          overflow: TextOverflow.clip,
         ),
-        spaceV(16),
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-              border: Border.all(
-            color: grey,
-          )),
-          child: FittedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Message me here',
-                  style: whiteText.copyWith(fontSize: 16, fontWeight: semiBold),
-                ),
-                spaceV(16),
-                const MessageCard(
-                    icon: 'assets/images/email.png',
-                    contacts: 'dzulfikar.sadid.khoir@gmail.com'),
-                spaceV(16),
-                const MessageCard(
-                    icon: 'assets/images/whatsapp.png',
-                    contacts: '+62 813-2008-2893'),
-                spaceV(16),
-                const MessageCard(
-                    icon: 'assets/images/instagram.png', contacts: '@joulephi'),
-              ],
+        spaceV(32),
+        StaggeredAnimate(
+          position: 2,
+          direction: Axis.horizontal,
+          duration: const Duration(seconds: 2),
+          offset: -100,
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+                border: Border.all(
+              color: grey,
+            )),
+            child: FittedBox(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Message me here',
+                    style:
+                        whiteText.copyWith(fontSize: 16, fontWeight: semiBold),
+                  ),
+                  spaceV(16),
+                  const MessageCard(
+                      icon: 'assets/images/email.png',
+                      contacts: 'dzulfikar.sadid.khoir@gmail.com'),
+                  spaceV(16),
+                  const MessageCard(
+                      icon: 'assets/images/whatsapp.png',
+                      contacts: '+62 813-2008-2893'),
+                  spaceV(16),
+                  const MessageCard(
+                      icon: 'assets/images/instagram.png',
+                      contacts: '@joulephi'),
+                ],
+              ),
             ),
           ),
         ),

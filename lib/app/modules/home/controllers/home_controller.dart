@@ -10,6 +10,7 @@ class HomeController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
   final currentPage = ''.obs;
   final viewAllIsHover = false.obs;
+  final onQuoteFinished = false.obs;
 
   @override
   void onInit() {

@@ -6,6 +6,7 @@ import 'package:portfolio/app/shared/utils.dart';
 import 'package:portfolio/app/widgets/drawer_phone.dart';
 import 'package:portfolio/app/widgets/navbar.dart';
 import 'package:portfolio/app/widgets/project_card.dart';
+import 'package:portfolio/app/widgets/staggered_animation.dart';
 
 import '../controllers/projects_controller.dart';
 
@@ -267,7 +268,14 @@ class ProjectsView extends GetResponsiveView<ProjectsController> {
             ),
           ),
           spaceV(48),
-          ...List.generate(5, (index) => const ProjectcardPhone()),
+          ...List.generate(
+            5,
+            (index) => StaggeredAnimate(
+              position: index,
+              direction: Axis.vertical,
+              child: AnimationLimiter(child: const ProjectcardPhone()),
+            ),
+          ),
           spaceV(32),
           const Divider(
             color: grey,

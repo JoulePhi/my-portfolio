@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:portfolio/app/data/navbar_controller.dart';
 import 'package:portfolio/app/shared/utils.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DrawerPhone extends GetView<NavbarController> {
   const DrawerPhone({super.key, required this.onTap});
@@ -61,6 +62,44 @@ class DrawerPhone extends GetView<NavbarController> {
                   )
                   .toList(),
             ),
+          ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.all(24),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    launchUrl(Uri.parse('https://wa.link/ffogoi'));
+                  },
+                  child: Image.asset(
+                    'assets/images/whatsapp.png',
+                    width: 32,
+                  ),
+                ),
+                spaceH(16),
+                GestureDetector(
+                  onTap: () {
+                    launchUrl(Uri.parse('https://www.instagram.com/joulephi'));
+                  },
+                  child: Image.asset(
+                    'assets/images/instagram.png',
+                    width: 32,
+                  ),
+                ),
+                spaceH(16),
+                GestureDetector(
+                  onTap: () {
+                    launchUrl(Uri.parse('https://github.com/JoulePhi'));
+                  },
+                  child: Image.asset(
+                    'assets/images/github.png',
+                    width: 32,
+                  ),
+                ),
+              ],
+            ),
           )
         ],
       ),
@@ -87,7 +126,7 @@ class DrawerItem extends StatelessWidget {
           text: TextSpan(
             text: '#',
             style: primaryText.copyWith(
-              fontSize: 32,
+              fontSize: 24,
               fontWeight: medium,
             ),
             children: <TextSpan>[
@@ -95,11 +134,11 @@ class DrawerItem extends StatelessWidget {
                 text: title,
                 style: currentPage == title
                     ? whiteText.copyWith(
-                        fontSize: 32,
+                        fontSize: 24,
                         fontWeight: medium,
                       )
                     : greyText.copyWith(
-                        fontSize: 32,
+                        fontSize: 24,
                         fontWeight: medium,
                       ),
               ),
