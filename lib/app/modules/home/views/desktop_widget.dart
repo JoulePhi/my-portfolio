@@ -693,7 +693,7 @@ class BannerTop extends StatelessWidget {
                     isRepeatingAnimation: false,
                     animatedTexts: [
                       TypewriterAnimatedText(
-                        'He crafts responsive websites where technologies\nmeet creativity',
+                        controller.homeModel.subtitle.toString(),
                         textStyle: greyText.copyWith(
                           fontSize: 16,
                         ),
@@ -766,7 +766,7 @@ class BannerTop extends StatelessWidget {
                                     ),
                                     spaceH(10),
                                     Text(
-                                      'UNIKOM',
+                                      controller.homeModel.status.toString(),
                                       style: whiteText.copyWith(fontSize: 16),
                                     )
                                   ],
@@ -784,8 +784,8 @@ class BannerTop extends StatelessWidget {
                         position: 2,
                         duration: const Duration(seconds: 2),
                         direction: Axis.horizontal,
-                        child: Image.asset(
-                          'assets/images/dots.png',
+                        child: Image.network(
+                          'https://firebasestorage.googleapis.com/v0/b/itsmejoule.appspot.com/o/me-half.png?alt=media&token=40b6cbe1-8b6a-45aa-afdb-8b47ae935198&_gl=1*oos76b*_ga*MTY4MjI3MDI3MC4xNjk5MzUyMzI5*_ga_CW55HF8NVT*MTY5OTM2MjAwMS4zLjEuMTY5OTM2NDc1Ny41Ni4wLjA.',
                           width: 84,
                         ),
                       ),

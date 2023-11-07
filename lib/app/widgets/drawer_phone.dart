@@ -63,6 +63,20 @@ class DrawerPhone extends GetView<NavbarController> {
                   .toList(),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Obx(
+              () => primaryButton(
+                title: 'Download CV',
+                onHover: (a) {
+                  controller.cvIsHover.value = a;
+                },
+                onTap: () {},
+                isHover: controller.cvIsHover.value,
+                fontSize: 12,
+              ),
+            ),
+          ),
           const Spacer(),
           Padding(
             padding: const EdgeInsets.all(24),

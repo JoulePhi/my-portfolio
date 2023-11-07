@@ -22,27 +22,41 @@ class NavBar extends GetView<NavbarController> {
           ),
         ),
         const Spacer(),
-        Obx(() => Row(
-              children: controller.navbar
-                  .map((e) => NavbarItem(
-                      title: e,
-                      isSelected:
-                          controller.navbar[controller.selectedPage.value],
-                      onHover: (a) {
-                        controller.navbarIsHover[controller.navbar.indexOf(e)] =
-                            a;
-                      },
-                      onTap: () {
-                        controller.selectedPage.value =
-                            controller.navbar.indexOf(e);
+        Obx(
+          () => Row(
+            children: controller.navbar
+                .map((e) => NavbarItem(
+                    title: e,
+                    isSelected:
+                        controller.navbar[controller.selectedPage.value],
+                    onHover: (a) {
+                      controller.navbarIsHover[controller.navbar.indexOf(e)] =
+                          a;
+                    },
+                    onTap: () {
+                      controller.selectedPage.value =
+                          controller.navbar.indexOf(e);
 
-                        Get.offAllNamed(
-                            '/${controller.navbar[controller.selectedPage.value]}');
-                      },
-                      isHover: controller
-                          .navbarIsHover[controller.navbar.indexOf(e)]))
-                  .toList(),
-            ))
+                      Get.offAllNamed(
+                          '/${controller.navbar[controller.selectedPage.value]}');
+                    },
+                    isHover:
+                        controller.navbarIsHover[controller.navbar.indexOf(e)]))
+                .toList(),
+          ),
+        ),
+        spaceH(16),
+        Obx(
+          () => primaryButton(
+            title: 'Download CV',
+            onHover: (a) {
+              controller.cvIsHover.value = a;
+            },
+            onTap: () {},
+            isHover: controller.cvIsHover.value,
+            fontSize: 12,
+          ),
+        )
       ],
     );
   }

@@ -32,6 +32,7 @@ primaryButton({
   required Function(bool) onHover,
   required Function() onTap,
   required bool isHover,
+  double fontSize = 16,
 }) {
   return InkWell(
     onHover: onHover,
@@ -47,7 +48,7 @@ primaryButton({
       child: Text(
         title,
         style: whiteText.copyWith(
-          fontSize: 16,
+          fontSize: fontSize,
           fontWeight: medium,
         ),
       ),

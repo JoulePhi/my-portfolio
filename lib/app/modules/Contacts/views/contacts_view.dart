@@ -134,118 +134,151 @@ class ContactsView extends GetResponsiveView<ContactsController> {
             ),
           ),
           spaceV(48),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: Get.width * .5,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: StaggeredAnimate(
-                        position: 0,
-                        direction: Axis.horizontal,
-                        offset: -100,
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: grey),
-                          ),
-                          child: TextField(
-                            style: whiteText.copyWith(fontSize: 16),
-                            cursorColor: grey,
-                            decoration: InputDecoration.collapsed(
-                              hintText: 'Name',
-                              hintStyle: greyText.copyWith(fontSize: 16),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    spaceH(16),
-                    Expanded(
-                      child: StaggeredAnimate(
-                        position: 1,
-                        direction: Axis.horizontal,
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: grey),
-                          ),
-                          child: TextField(
-                            style: whiteText.copyWith(fontSize: 16),
-                            cursorColor: grey,
-                            decoration: InputDecoration.collapsed(
-                              hintText: 'Email',
-                              hintStyle: greyText.copyWith(fontSize: 16),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              spaceV(16),
-              SizedBox(
-                width: Get.width * .5,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    StaggeredAnimate(
-                      position: 0,
-                      direction: Axis.vertical,
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: grey),
-                        ),
-                        child: TextField(
-                          style: whiteText.copyWith(fontSize: 16),
-                          cursorColor: grey,
-                          maxLines: 8,
-                          decoration: InputDecoration.collapsed(
-                            hintText: 'Message',
-                            hintStyle: greyText.copyWith(fontSize: 16),
-                          ),
-                        ),
-                      ),
-                    ),
-                    spaceV(16),
-                    StaggeredAnimate(
-                      position: 1,
-                      direction: Axis.vertical,
-                      child: Obx(
-                        () => InkWell(
-                          onTap: () {},
-                          onHover: (a) {
-                            controller.sendHover.value = a;
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
+          Form(
+            key: controller.formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: Get.width * .5,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: StaggeredAnimate(
+                          position: 0,
+                          direction: Axis.horizontal,
+                          offset: -100,
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              border: Border.all(color: primary),
-                              color: controller.sendHover.value
-                                  ? primary.withOpacity(.2)
-                                  : Colors.transparent,
+                              border: Border.all(color: grey),
                             ),
-                            child: Text(
-                              'Send',
-                              style: whiteText.copyWith(
-                                fontSize: 16,
-                                fontWeight: medium,
+                            child: TextFormField(
+                              controller: controller.nameController,
+                              style: whiteText.copyWith(fontSize: 16),
+                              cursorColor: grey,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your name';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration.collapsed(
+                                hintText: 'Name',
+                                hintStyle: greyText.copyWith(fontSize: 16),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    )
-                  ],
+                      spaceH(16),
+                      Expanded(
+                        child: StaggeredAnimate(
+                          position: 1,
+                          direction: Axis.horizontal,
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: grey),
+                            ),
+                            child: TextFormField(
+                              controller: controller.emailController,
+                              style: whiteText.copyWith(fontSize: 16),
+                              cursorColor: grey,
+                              validator: (value) {
+                                if (value == null ||
+                                    value.isEmpty ||
+                                    !value.contains('@')) {
+                                  return 'Please enter your name';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration.collapsed(
+                                hintText: 'Email',
+                                hintStyle: greyText.copyWith(fontSize: 16),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                spaceV(16),
+                SizedBox(
+                  width: Get.width * .5,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      StaggeredAnimate(
+                        position: 0,
+                        direction: Axis.vertical,
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: grey),
+                          ),
+                          child: TextFormField(
+                            controller: controller.messageController,
+                            style: whiteText.copyWith(fontSize: 16),
+                            cursorColor: grey,
+                            maxLines: 8,
+                            decoration: InputDecoration.collapsed(
+                              hintText: 'Message',
+                              hintStyle: greyText.copyWith(fontSize: 16),
+                            ),
+                          ),
+                        ),
+                      ),
+                      spaceV(16),
+                      StaggeredAnimate(
+                        position: 1,
+                        direction: Axis.vertical,
+                        child: Obx(
+                          () => InkWell(
+                            onTap: () {
+                              if (controller.formKey.currentState!.validate()) {
+                                controller.sendEmail();
+                              }
+                            },
+                            onHover: (a) {
+                              controller.sendHover.value = a;
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 200),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: primary),
+                                color: controller.sendHover.value
+                                    ? primary.withOpacity(.2)
+                                    : Colors.transparent,
+                              ),
+                              child: controller.isSending.value
+                                  ? const SizedBox(
+                                      width: 16,
+                                      height: 16,
+                                      child: CircularProgressIndicator(
+                                        color: primary,
+                                        strokeWidth: 2,
+                                      ),
+                                    )
+                                  : Text(
+                                      'Send',
+                                      style: whiteText.copyWith(
+                                        fontSize: 16,
+                                        fontWeight: medium,
+                                      ),
+                                    ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
           spaceV(90),
           const Divider(
@@ -429,118 +462,151 @@ class ContactsView extends GetResponsiveView<ContactsController> {
             ),
           ),
           spaceV(32),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: Get.width,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: StaggeredAnimate(
-                        position: 0,
-                        direction: Axis.horizontal,
-                        offset: -100,
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: grey),
-                          ),
-                          child: TextField(
-                            style: whiteText.copyWith(fontSize: 16),
-                            cursorColor: grey,
-                            decoration: InputDecoration.collapsed(
-                              hintText: 'Name',
-                              hintStyle: greyText.copyWith(fontSize: 16),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    spaceH(16),
-                    Expanded(
-                      child: StaggeredAnimate(
-                        position: 1,
-                        direction: Axis.horizontal,
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: grey),
-                          ),
-                          child: TextField(
-                            style: whiteText.copyWith(fontSize: 16),
-                            cursorColor: grey,
-                            decoration: InputDecoration.collapsed(
-                              hintText: 'Email',
-                              hintStyle: greyText.copyWith(fontSize: 16),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              spaceV(16),
-              SizedBox(
-                width: Get.width,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    StaggeredAnimate(
-                      position: 0,
-                      direction: Axis.vertical,
-                      child: Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: grey),
-                        ),
-                        child: TextField(
-                          style: whiteText.copyWith(fontSize: 16),
-                          cursorColor: grey,
-                          maxLines: 8,
-                          decoration: InputDecoration.collapsed(
-                            hintText: 'Message',
-                            hintStyle: greyText.copyWith(fontSize: 16),
-                          ),
-                        ),
-                      ),
-                    ),
-                    spaceV(16),
-                    StaggeredAnimate(
-                      position: 1,
-                      direction: Axis.vertical,
-                      child: Obx(
-                        () => InkWell(
-                          onTap: () {},
-                          onHover: (a) {
-                            controller.sendHover.value = a;
-                          },
-                          child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 200),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 8),
+          Form(
+            key: controller.formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: Get.width,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: StaggeredAnimate(
+                          position: 0,
+                          direction: Axis.horizontal,
+                          offset: -100,
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
-                              border: Border.all(color: primary),
-                              color: controller.sendHover.value
-                                  ? primary.withOpacity(.2)
-                                  : Colors.transparent,
+                              border: Border.all(color: grey),
                             ),
-                            child: Text(
-                              'Send',
-                              style: whiteText.copyWith(
-                                fontSize: 16,
-                                fontWeight: medium,
+                            child: TextFormField(
+                              controller: controller.nameController,
+                              style: whiteText.copyWith(fontSize: 16),
+                              cursorColor: grey,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your name';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration.collapsed(
+                                hintText: 'Name',
+                                hintStyle: greyText.copyWith(fontSize: 16),
                               ),
                             ),
                           ),
                         ),
                       ),
-                    )
-                  ],
+                      spaceH(16),
+                      Expanded(
+                        child: StaggeredAnimate(
+                          position: 1,
+                          direction: Axis.horizontal,
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: grey),
+                            ),
+                            child: TextFormField(
+                              controller: controller.emailController,
+                              style: whiteText.copyWith(fontSize: 16),
+                              cursorColor: grey,
+                              validator: (value) {
+                                if (value == null ||
+                                    value.isEmpty ||
+                                    !value.contains('@')) {
+                                  return 'Please enter a valid email';
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration.collapsed(
+                                hintText: 'Email',
+                                hintStyle: greyText.copyWith(fontSize: 16),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                spaceV(16),
+                SizedBox(
+                  width: Get.width,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      StaggeredAnimate(
+                        position: 0,
+                        direction: Axis.vertical,
+                        child: Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: grey),
+                          ),
+                          child: TextFormField(
+                            controller: controller.messageController,
+                            style: whiteText.copyWith(fontSize: 16),
+                            cursorColor: grey,
+                            maxLines: 8,
+                            decoration: InputDecoration.collapsed(
+                              hintText: 'Message',
+                              hintStyle: greyText.copyWith(fontSize: 16),
+                            ),
+                          ),
+                        ),
+                      ),
+                      spaceV(16),
+                      StaggeredAnimate(
+                        position: 1,
+                        direction: Axis.vertical,
+                        child: Obx(
+                          () => InkWell(
+                            onTap: () {
+                              if (controller.formKey.currentState!.validate()) {
+                                controller.sendEmail();
+                              }
+                            },
+                            onHover: (a) {
+                              controller.sendHover.value = a;
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 200),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: primary),
+                                color: controller.sendHover.value
+                                    ? primary.withOpacity(.2)
+                                    : Colors.transparent,
+                              ),
+                              child: controller.isSending.value
+                                  ? const SizedBox(
+                                      width: 16,
+                                      height: 16,
+                                      child: CircularProgressIndicator(
+                                        color: primary,
+                                        strokeWidth: 2,
+                                      ),
+                                    )
+                                  : Text(
+                                      'Send',
+                                      style: whiteText.copyWith(
+                                        fontSize: 16,
+                                        fontWeight: medium,
+                                      ),
+                                    ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
           spaceV(32),
           const Divider(
