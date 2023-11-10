@@ -103,7 +103,9 @@
           serviceWorkerVersion: serviceWorkerVersion,
         },
         onEntrypointLoaded: async function(engineInitializer) {
-           let appRunner = await engineInitializer.initializeEngine();
+           let appRunner = await engineInitializer.initializeEngine({
+            renderer: "html"
+           });
            await appRunner.runApp();
         }
       });

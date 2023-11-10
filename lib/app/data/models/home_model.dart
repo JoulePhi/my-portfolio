@@ -24,8 +24,8 @@ class HomeModel {
       quoteBy: json['quote_by'],
       status: json['status'],
       subtitle: json['subtitle'],
-      meAbout: json['me_about'],
-      meBanner: json['me_banner'],
+      meAbout: json['me-about'],
+      meBanner: json['me-banner'],
     );
   }
 }

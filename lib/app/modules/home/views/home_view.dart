@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:portfolio/app/data/datas_controller.dart';
 import 'package:portfolio/app/modules/home/views/desktop_widget.dart';
 import 'package:portfolio/app/modules/home/views/phone_widget.dart';
 import 'package:portfolio/app/widgets/drawer_phone.dart';
@@ -18,8 +19,8 @@ class HomeView extends GetResponsiveView<HomeController> {
     return Scaffold(
         backgroundColor: background,
         body: Obx(() {
-          if (controller.pageIsLoading.value) {
-            return Center(
+          if (Get.find<DataController>().pageIsLoading.value) {
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -45,73 +46,37 @@ class HomeView extends GetResponsiveView<HomeController> {
                     spaceV(50),
                     Get.width < 1500
                         ? Row(
-                            children: [
-                              const Flexible(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: List.generate(
+                              3,
+                              (index) => Flexible(
                                 flex: 1,
                                 child: StaggeredAnimate(
-                                  position: 0,
+                                  position: index,
                                   direction: Axis.vertical,
-                                  child: Projectcard(),
+                                  child: Projectcard(
+                                    projectModel: Get.find<DataController>()
+                                        .projects[index],
+                                  ),
                                 ),
                               ),
-                              spaceH(16),
-                              const Flexible(
-                                flex: 1,
-                                child: StaggeredAnimate(
-                                  position: 1,
-                                  direction: Axis.vertical,
-                                  child: Projectcard(),
-                                ),
-                              ),
-                              spaceH(16),
-                              const Flexible(
-                                flex: 1,
-                                child: StaggeredAnimate(
-                                  position: 2,
-                                  direction: Axis.vertical,
-                                  child: Projectcard(),
-                                ),
-                              ),
-                            ],
+                            ),
                           )
                         : Row(
-                            children: [
-                              const Flexible(
+                            children: List.generate(
+                              4,
+                              (index) => Flexible(
                                 flex: 1,
                                 child: StaggeredAnimate(
-                                  position: 0,
+                                  position: index,
                                   direction: Axis.vertical,
-                                  child: Projectcard(),
+                                  child: Projectcard(
+                                    projectModel: Get.find<DataController>()
+                                        .projects[index],
+                                  ),
                                 ),
                               ),
-                              spaceH(16),
-                              const Flexible(
-                                flex: 1,
-                                child: StaggeredAnimate(
-                                  position: 1,
-                                  direction: Axis.vertical,
-                                  child: Projectcard(),
-                                ),
-                              ),
-                              spaceH(16),
-                              const Flexible(
-                                flex: 1,
-                                child: StaggeredAnimate(
-                                  position: 2,
-                                  direction: Axis.vertical,
-                                  child: Projectcard(),
-                                ),
-                              ),
-                              spaceH(16),
-                              const Flexible(
-                                flex: 1,
-                                child: StaggeredAnimate(
-                                  position: 2,
-                                  direction: Axis.vertical,
-                                  child: Projectcard(),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                     spaceV(50),
                     const Skills(),
@@ -232,13 +197,17 @@ class HomeView extends GetResponsiveView<HomeController> {
             const Projects(),
             spaceV(50),
             Row(
-              children: [
-                const Projectcard(),
-                spaceH(16),
-                const Projectcard(),
-                spaceH(16),
-                const Projectcard(),
-              ],
+              children: List.generate(
+                3,
+                (index) => Flexible(
+                  flex: 1,
+                  child: StaggeredAnimate(
+                    position: index,
+                    direction: Axis.vertical,
+                    child: ProjectcardPhone(),
+                  ),
+                ),
+              ),
             ),
             spaceV(50),
             const Skills(),

@@ -4,7 +4,7 @@ import 'package:portfolio/app/shared/utils.dart';
 class SkillCard extends StatelessWidget {
   const SkillCard({super.key, required this.skills, required this.title});
   final String title;
-  final List<String> skills;
+  final List skills;
   @override
   Widget build(BuildContext context) {
     return Container(

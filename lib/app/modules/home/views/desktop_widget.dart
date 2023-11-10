@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
+import 'package:portfolio/app/data/datas_controller.dart';
 import 'package:portfolio/app/modules/home/controllers/home_controller.dart';
 import 'package:portfolio/app/shared/utils.dart';
 import 'package:portfolio/app/widgets/message_card.dart';
@@ -25,7 +26,7 @@ class ContactBox extends StatelessWidget {
             direction: Axis.horizontal,
             offset: -100,
             child: Text(
-              'I’m interested in freelance opportunities. However, if you have other request or question, don’t hesitate to contact me',
+              Get.find<DataController>().contacts.description.toString(),
               style: greyText.copyWith(
                 fontSize: 16,
                 fontWeight: medium,
@@ -59,17 +60,29 @@ class ContactBox extends StatelessWidget {
                                 fontSize: 16, fontWeight: semiBold),
                           ),
                           spaceV(16),
-                          const MessageCard(
-                              icon: 'assets/images/email.png',
-                              contacts: 'dzulfikar.sadid.khoir@gmail.com'),
+                          MessageCard(
+                            icon: 'assets/images/email.png',
+                            contacts: Get.find<DataController>()
+                                .contacts
+                                .email
+                                .toString(),
+                          ),
                           spaceV(16),
-                          const MessageCard(
-                              icon: 'assets/images/whatsapp.png',
-                              contacts: '+62 813-2008-2893'),
+                          MessageCard(
+                            icon: 'assets/images/whatsapp.png',
+                            contacts: Get.find<DataController>()
+                                .contacts
+                                .number
+                                .toString(),
+                          ),
                           spaceV(16),
-                          const MessageCard(
-                              icon: 'assets/images/instagram.png',
-                              contacts: '@joulephi'),
+                          MessageCard(
+                            icon: 'assets/images/instagram.png',
+                            contacts: Get.find<DataController>()
+                                .contacts
+                                .instagram
+                                .toString(),
+                          ),
                         ],
                       ),
                     ),
@@ -176,22 +189,21 @@ class AboutMe extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Hello, I\'m JoulePhi!',
-                        style: greyText.copyWith(fontSize: 16)),
-                    spaceV(16),
                     Text(
-                      'I’m a self-taught front-end developer based in Kyiv, Ukraine. '
-                      'I can develop responsive websites from scratch and raise them '
-                      'into modern user-friendly web experiences.',
+                      'Hello, i\'m JoulePhi',
                       style: greyText.copyWith(fontSize: 16),
                     ),
                     spaceV(16),
                     Text(
-                      'Transforming my creativity and knowledge into websites has been my '
-                      'passion for over a year. I have been helping various clients to '
-                      'establish their presence online. I always strive to learn about the '
-                      'newest technologies and frameworks.',
-                      style: greyText.copyWith(fontSize: 16),
+                      Get.find<DataController>()
+                          .aboutModel
+                          .description
+                          .toString(),
+                      style: greyText.copyWith(
+                        fontSize: 16,
+                        height: 2,
+                      ),
+                      textAlign: TextAlign.justify,
                     ),
                   ],
                 ),
@@ -237,12 +249,16 @@ class AboutMe extends StatelessWidget {
                   duration: const Duration(seconds: 2),
                   child: Container(
                     height: 500,
-                    decoration: const BoxDecoration(
-                        border: Border(bottom: BorderSide(color: primary)),
+                    decoration: BoxDecoration(
+                        border:
+                            const Border(bottom: BorderSide(color: primary)),
                         image: DecorationImage(
                           fit: BoxFit.fitHeight,
-                          image: AssetImage(
-                            'assets/images/me-4.png',
+                          image: NetworkImage(
+                            Get.find<DataController>()
+                                .homeModel
+                                .meAbout
+                                .toString(),
                           ),
                         )),
                     alignment: Alignment.bottomCenter,
@@ -339,7 +355,7 @@ class SkillsElement extends StatelessWidget {
             ),
           ),
         ),
-        const Flexible(
+        Flexible(
           flex: 5,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -352,16 +368,12 @@ class SkillsElement extends StatelessWidget {
                   child: StaggeredAnimate(
                     position: 0,
                     direction: Axis.vertical,
-                    delay: Duration(seconds: 1),
+                    delay: const Duration(seconds: 1),
                     child: SkillCard(
                       title: 'Language',
-                      skills: [
-                        'C++',
-                        'Python',
-                        'Dart',
-                        'PHP',
-                        'Javascript',
-                      ],
+                      skills: Get.find<DataController>()
+                          .aboutModel
+                          .skills!['language'],
                     ),
                   ),
                 ),
@@ -376,28 +388,23 @@ class SkillsElement extends StatelessWidget {
                       StaggeredAnimate(
                         position: 0,
                         direction: Axis.vertical,
-                        delay: Duration(seconds: 1),
+                        delay: const Duration(seconds: 1),
                         child: SkillCard(
                           title: 'Databases',
-                          skills: [
-                            'MySQL',
-                            'MongoDB',
-                            'Redis',
-                            'Firebase',
-                          ],
+                          skills: Get.find<DataController>()
+                              .aboutModel
+                              .skills!['databases'],
                         ),
                       ),
                       StaggeredAnimate(
                         position: 1,
                         direction: Axis.vertical,
-                        delay: Duration(seconds: 1),
+                        delay: const Duration(seconds: 1),
                         child: SkillCard(
                           title: 'Other',
-                          skills: [
-                            'HTML',
-                            'CSS',
-                            'REST',
-                          ],
+                          skills: Get.find<DataController>()
+                              .aboutModel
+                              .skills!['other'],
                         ),
                       ),
                     ],
@@ -414,33 +421,23 @@ class SkillsElement extends StatelessWidget {
                       StaggeredAnimate(
                         position: 0,
                         direction: Axis.vertical,
-                        delay: Duration(seconds: 1),
+                        delay: const Duration(seconds: 1),
                         child: SkillCard(
                           title: 'Tools',
-                          skills: [
-                            'VSCode',
-                            'Figma',
-                            'Postman',
-                            'Laragon',
-                            'Git',
-                            'Linux'
-                          ],
+                          skills: Get.find<DataController>()
+                              .aboutModel
+                              .skills!['tools'],
                         ),
                       ),
                       StaggeredAnimate(
                         position: 1,
                         direction: Axis.vertical,
-                        delay: Duration(seconds: 1),
+                        delay: const Duration(seconds: 1),
                         child: SkillCard(
                           title: 'Frameworks',
-                          skills: [
-                            'Flutter',
-                            'Laravel',
-                            'Vue JS',
-                            'Inertia JS',
-                            'Arduino',
-                            'Tailwind'
-                          ],
+                          skills: Get.find<DataController>()
+                              .aboutModel
+                              .skills!['frameworks'],
                         ),
                       ),
                     ],
@@ -591,7 +588,7 @@ class Quote extends StatelessWidget {
                     isRepeatingAnimation: false,
                     animatedTexts: [
                       TypewriterAnimatedText(
-                        'Knowledge is the light that dissipates the darkness',
+                        Get.find<DataController>().homeModel.quote.toString(),
                         textStyle: whiteText.copyWith(
                           fontSize: 24,
                           fontWeight: medium,
@@ -621,7 +618,7 @@ class Quote extends StatelessWidget {
                 border: Border.all(color: grey),
               ),
               child: Text(
-                '- Avicenna',
+                '- ${Get.find<DataController>().homeModel.quoteBy.toString()}',
                 style: whiteText.copyWith(
                   fontSize: 24,
                 ),
@@ -693,7 +690,10 @@ class BannerTop extends StatelessWidget {
                     isRepeatingAnimation: false,
                     animatedTexts: [
                       TypewriterAnimatedText(
-                        controller.homeModel.subtitle.toString(),
+                        Get.find<DataController>()
+                            .homeModel
+                            .subtitle
+                            .toString(),
                         textStyle: greyText.copyWith(
                           fontSize: 16,
                         ),
@@ -740,8 +740,11 @@ class BannerTop extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Image.asset(
-                            'assets/images/me-half.png',
+                          Image.network(
+                            Get.find<DataController>()
+                                .homeModel
+                                .meBanner
+                                .toString(),
                             width: Get.width * .3,
                           ),
                           Container(
@@ -766,7 +769,10 @@ class BannerTop extends StatelessWidget {
                                     ),
                                     spaceH(10),
                                     Text(
-                                      controller.homeModel.status.toString(),
+                                      Get.find<DataController>()
+                                          .homeModel
+                                          .status
+                                          .toString(),
                                       style: whiteText.copyWith(fontSize: 16),
                                     )
                                   ],
@@ -785,7 +791,7 @@ class BannerTop extends StatelessWidget {
                         duration: const Duration(seconds: 2),
                         direction: Axis.horizontal,
                         child: Image.network(
-                          'https://firebasestorage.googleapis.com/v0/b/itsmejoule.appspot.com/o/me-half.png?alt=media&token=40b6cbe1-8b6a-45aa-afdb-8b47ae935198&_gl=1*oos76b*_ga*MTY4MjI3MDI3MC4xNjk5MzUyMzI5*_ga_CW55HF8NVT*MTY5OTM2MjAwMS4zLjEuMTY5OTM2NDc1Ny41Ni4wLjA.',
+                          'assets/images/dots.png',
                           width: 84,
                         ),
                       ),
