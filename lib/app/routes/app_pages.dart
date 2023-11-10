@@ -16,7 +16,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.PROJECTS;
+  static const INITIAL = Routes.HOME;
   static final UNKNOWN = GetPage(
     name: _Paths.UNKNOWN,
     page: () => const UnknownView(),

@@ -5,6 +5,7 @@ import 'package:portfolio/app/data/models/contact_model.dart';
 import 'package:portfolio/app/data/models/home_model.dart';
 import 'package:portfolio/app/data/models/project_model.dart';
 import 'dart:convert';
+import 'package:flutterwebapp_reload_detector/flutterwebapp_reload_detector.dart';
 
 class DataController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;

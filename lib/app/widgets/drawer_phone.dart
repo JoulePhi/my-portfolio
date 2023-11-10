@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:portfolio/app/data/datas_controller.dart';
 import 'package:portfolio/app/data/navbar_controller.dart';
 import 'package:portfolio/app/shared/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -71,7 +72,10 @@ class DrawerPhone extends GetView<NavbarController> {
                 onHover: (a) {
                   controller.cvIsHover.value = a;
                 },
-                onTap: () {},
+                onTap: () {
+                  launchUrl(Uri.parse(
+                      Get.find<DataController>().aboutModel.cv.toString()));
+                },
                 isHover: controller.cvIsHover.value,
                 fontSize: 12,
               ),

@@ -6,7 +6,7 @@ class InitialBinding extends Bindings {
   @override
   void dependencies() {
     // Get.lazyPut(() => NavbarController());
-    Get.put(NavbarController(), permanent: true);
     Get.put(DataController(), permanent: true);
+    Get.put(NavbarController(), permanent: true);
   }
 }

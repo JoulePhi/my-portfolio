@@ -232,8 +232,8 @@ class ProjectCardGrid extends StatelessWidget {
 }
 
 class ProjectcardPhone extends StatelessWidget {
-  const ProjectcardPhone({super.key});
-
+  const ProjectcardPhone({super.key, required this.projectModel});
+  final ProjectModel projectModel;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -244,9 +244,13 @@ class ProjectcardPhone extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
+          SizedBox(
             height: 200,
-            child: Placeholder(),
+            child: Image.network(
+              projectModel.thumbnail!,
+              width: double.infinity,
+              fit: BoxFit.fitWidth,
+            ),
           ),
           Container(
             decoration: const BoxDecoration(
@@ -261,28 +265,19 @@ class ProjectcardPhone extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      'HTML',
-                      style: greyText.copyWith(fontSize: 12),
-                    ),
-                    spaceH(8),
-                    Text(
-                      'Python',
-                      style: greyText.copyWith(fontSize: 12),
-                    ),
-                    spaceH(8),
-                    Text(
-                      'SCSS',
-                      style: greyText.copyWith(fontSize: 12),
-                    ),
-                    spaceH(8),
-                    Text(
-                      'Flask',
-                      style: greyText.copyWith(fontSize: 12),
-                    ),
-                    spaceH(8),
-                  ],
+                  children: projectModel.technologies!
+                      .map(
+                        (e) => Row(
+                          children: [
+                            Text(
+                              e,
+                              style: greyText.copyWith(fontSize: 16),
+                            ),
+                            spaceH(8),
+                          ],
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
             ),
@@ -293,11 +288,16 @@ class ProjectcardPhone extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'ChertNodes',
+                  projectModel.name.toString(),
                   style: whiteText.copyWith(
-                    fontSize: 18,
+                    fontSize: 24,
                     fontWeight: medium,
                   ),
+                ),
+                spaceV(16),
+                Text(
+                  projectModel.description.toString(),
+                  style: greyText.copyWith(fontSize: 16),
                 ),
               ],
             ),

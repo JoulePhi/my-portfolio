@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:portfolio/app/data/datas_controller.dart';
 import 'package:portfolio/app/modules/home/controllers/home_controller.dart';
 import 'package:portfolio/app/shared/utils.dart';
 import 'package:portfolio/app/widgets/message_card.dart';
@@ -56,7 +57,7 @@ class BannerPhone extends StatelessWidget {
             isRepeatingAnimation: false,
             animatedTexts: [
               TypewriterAnimatedText(
-                'He crafts responsive websites where technologies meet creativity',
+                Get.find<DataController>().homeModel.subtitle.toString(),
                 textStyle: greyText.copyWith(
                   fontSize: 16,
                 ),
@@ -91,8 +92,11 @@ class BannerPhone extends StatelessWidget {
                       position: 0,
                       direction: Axis.horizontal,
                       duration: const Duration(seconds: 2),
-                      child: Image.asset(
-                        'assets/images/me-half.png',
+                      child: Image.network(
+                        Get.find<DataController>()
+                            .homeModel
+                            .meBanner
+                            .toString(),
                         width: double.infinity,
                       ),
                     ),
@@ -121,7 +125,10 @@ class BannerPhone extends StatelessWidget {
                             ),
                             spaceH(10),
                             Text(
-                              'UNIKOM',
+                              Get.find<DataController>()
+                                  .homeModel
+                                  .status
+                                  .toString(),
                               style: whiteText.copyWith(fontSize: 16),
                             )
                           ],
@@ -175,7 +182,7 @@ class QuotePhone extends StatelessWidget {
                     isRepeatingAnimation: false,
                     animatedTexts: [
                       TypewriterAnimatedText(
-                        'Knowledge is the light that dissipates the darkness',
+                        Get.find<DataController>().homeModel.quote.toString(),
                         textStyle: whiteText.copyWith(
                           fontSize: 18,
                           fontWeight: medium,
@@ -191,7 +198,7 @@ class QuotePhone extends StatelessWidget {
                     border: Border.all(color: grey),
                   ),
                   child: Text(
-                    '- Avicenna',
+                    '- ${Get.find<DataController>().homeModel.quoteBy}',
                     style: whiteText.copyWith(
                       fontSize: 18,
                     ),
@@ -272,24 +279,15 @@ class ProjectsPhone extends StatelessWidget {
           ],
         ),
         spaceV(32),
-        const StaggeredAnimate(
-          position: 0,
-          direction: Axis.horizontal,
-          duration: Duration(seconds: 2),
-          child: ProjectcardPhone(),
-        ),
-        const StaggeredAnimate(
-          position: 1,
-          offset: -100,
-          direction: Axis.horizontal,
-          duration: Duration(seconds: 2),
-          child: ProjectcardPhone(),
-        ),
-        const StaggeredAnimate(
-          position: 2,
-          direction: Axis.horizontal,
-          duration: Duration(seconds: 2),
-          child: ProjectcardPhone(),
+        ...List.generate(
+          3,
+          (index) => StaggeredAnimate(
+            position: index,
+            direction: Axis.vertical,
+            child: ProjectcardPhone(
+              projectModel: Get.find<DataController>().projects[index],
+            ),
+          ),
         ),
       ],
     );
@@ -334,7 +332,7 @@ class SkillsElementPhone extends StatelessWidget {
           ],
         ),
         spaceV(16),
-        const Row(
+        Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Flexible(
@@ -347,46 +345,37 @@ class SkillsElementPhone extends StatelessWidget {
                     StaggeredAnimate(
                       position: 0,
                       direction: Axis.vertical,
-                      duration: Duration(seconds: 2),
-                      delay: Duration(seconds: 1),
+                      duration: const Duration(seconds: 2),
+                      delay: const Duration(seconds: 1),
                       child: SkillCard(
                         title: 'Language',
-                        skills: [
-                          'C++',
-                          'Python',
-                          'Dart',
-                          'PHP',
-                          'Javascript',
-                        ],
+                        skills: Get.find<DataController>()
+                            .aboutModel
+                            .skills!['language'],
                       ),
                     ),
                     StaggeredAnimate(
                       position: 1,
                       direction: Axis.vertical,
-                      duration: Duration(seconds: 2),
-                      delay: Duration(seconds: 1),
+                      duration: const Duration(seconds: 2),
+                      delay: const Duration(seconds: 1),
                       child: SkillCard(
                         title: 'Databases',
-                        skills: [
-                          'MySQL',
-                          'MongoDB',
-                          'Redis',
-                          'Firebase',
-                        ],
+                        skills: Get.find<DataController>()
+                            .aboutModel
+                            .skills!['databases'],
                       ),
                     ),
                     StaggeredAnimate(
                       position: 2,
                       direction: Axis.vertical,
-                      duration: Duration(seconds: 2),
-                      delay: Duration(seconds: 1),
+                      duration: const Duration(seconds: 2),
+                      delay: const Duration(seconds: 1),
                       child: SkillCard(
                         title: 'Other',
-                        skills: [
-                          'HTML',
-                          'CSS',
-                          'REST',
-                        ],
+                        skills: Get.find<DataController>()
+                            .aboutModel
+                            .skills!['other'],
                       ),
                     ),
                   ],
@@ -403,35 +392,25 @@ class SkillsElementPhone extends StatelessWidget {
                     StaggeredAnimate(
                       position: 0,
                       direction: Axis.vertical,
-                      duration: Duration(seconds: 2),
-                      delay: Duration(seconds: 1),
+                      duration: const Duration(seconds: 2),
+                      delay: const Duration(seconds: 1),
                       child: SkillCard(
                         title: 'Tools',
-                        skills: [
-                          'VSCode',
-                          'Figma',
-                          'Postman',
-                          'Laragon',
-                          'Git',
-                          'Linux'
-                        ],
+                        skills: Get.find<DataController>()
+                            .aboutModel
+                            .skills!['tools'],
                       ),
                     ),
                     StaggeredAnimate(
                       position: 1,
                       direction: Axis.vertical,
-                      duration: Duration(seconds: 2),
-                      delay: Duration(seconds: 1),
+                      duration: const Duration(seconds: 2),
+                      delay: const Duration(seconds: 1),
                       child: SkillCard(
                         title: 'Frameworks',
-                        skills: [
-                          'Flutter',
-                          'Laravel',
-                          'Vue JS',
-                          'Inertia JS',
-                          'Arduino',
-                          'Tailwind'
-                        ],
+                        skills: Get.find<DataController>()
+                            .aboutModel
+                            .skills!['frameworks'],
                       ),
                     ),
                   ],
@@ -493,7 +472,7 @@ class AboutMePhone extends StatelessWidget {
                   style: greyText.copyWith(fontSize: 16)),
               spaceV(16),
               Text(
-                "I'm a self-taught front-end developer based in Kyiv, Ukraine. I can develop responsive websites from scratch and raise them into modern user-friendly web experiences.",
+                Get.find<DataController>().aboutModel.description.toString(),
                 style: greyText.copyWith(fontSize: 16),
                 textAlign: TextAlign.left,
               ),
@@ -564,7 +543,7 @@ class ContactsPhone extends StatelessWidget {
           direction: Axis.horizontal,
           duration: const Duration(seconds: 2),
           child: Text(
-            'I’m interested in freelance opportunities. However, if you have other request or question, don’t hesitate to contact me',
+            Get.find<DataController>().contacts.description.toString(),
             style: greyText.copyWith(
               fontSize: 16,
               fontWeight: medium,
@@ -594,17 +573,24 @@ class ContactsPhone extends StatelessWidget {
                         whiteText.copyWith(fontSize: 16, fontWeight: semiBold),
                   ),
                   spaceV(16),
-                  const MessageCard(
+                  MessageCard(
                       icon: 'assets/images/email.png',
-                      contacts: 'dzulfikar.sadid.khoir@gmail.com'),
+                      contacts:
+                          Get.find<DataController>().contacts.email.toString()),
                   spaceV(16),
-                  const MessageCard(
+                  MessageCard(
                       icon: 'assets/images/whatsapp.png',
-                      contacts: '+62 813-2008-2893'),
+                      contacts: Get.find<DataController>()
+                          .contacts
+                          .number
+                          .toString()),
                   spaceV(16),
-                  const MessageCard(
+                  MessageCard(
                       icon: 'assets/images/instagram.png',
-                      contacts: '@joulephi'),
+                      contacts: Get.find<DataController>()
+                          .contacts
+                          .instagram
+                          .toString()),
                 ],
               ),
             ),

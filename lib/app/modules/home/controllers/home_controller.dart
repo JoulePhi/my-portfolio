@@ -17,11 +17,6 @@ class HomeController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
-  void onInit() async {
-    super.onInit();
-  }
-
-  @override
   void onReady() {
     // TODO: implement onReady
     super.onReady();

@@ -21,7 +21,9 @@ class HomeView extends GetResponsiveView<HomeController> {
         body: Obx(() {
           if (Get.find<DataController>().pageIsLoading.value) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: primary,
+              ),
             );
           }
 
@@ -176,65 +178,6 @@ class HomeView extends GetResponsiveView<HomeController> {
   }
 
   @override
-  Widget? tablet() {
-    return Scaffold(
-      backgroundColor: background,
-      body: Scrollbar(
-        controller: controller.scrollControler,
-        child: ListView(
-          controller: controller.scrollControler,
-          padding: EdgeInsets.symmetric(horizontal: Get.width * .1),
-          children: [
-            const NavBar(
-              currentPage: 'home',
-            ),
-            BannerTop(
-              controller: controller,
-              screen: screen.screenType,
-            ),
-            const Quote(),
-            spaceV(100),
-            const Projects(),
-            spaceV(50),
-            Row(
-              children: List.generate(
-                3,
-                (index) => Flexible(
-                  flex: 1,
-                  child: StaggeredAnimate(
-                    position: index,
-                    direction: Axis.vertical,
-                    child: ProjectcardPhone(),
-                  ),
-                ),
-              ),
-            ),
-            spaceV(50),
-            const Skills(),
-            const SkillsElement(),
-            spaceV(100),
-            AboutMe(controller: controller),
-            spaceV(100),
-            const Contacts(),
-            spaceV(50),
-            const ContactBox(),
-            spaceV(100),
-            const Divider(
-              color: grey,
-            ),
-            spaceV(32),
-            Text(
-              '© Copyright 2023. Made by JoulePhi',
-              style: greyText.copyWith(fontSize: 16),
-            ),
-            spaceV(32),
-          ],
-        ),
-      ),
-    );
-  }
-
-  @override
   Widget? phone() {
     return Scaffold(
       key: controller.scaffoldKey,
@@ -270,35 +213,45 @@ class HomeView extends GetResponsiveView<HomeController> {
           )
         ],
       ),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        children: [
-          BannerPhone(controller: controller),
-          spaceV(Get.height * .08),
-          const QuotePhone(),
-          spaceV(Get.height * .08),
-          const ProjectsPhone(),
-          spaceV(Get.height * .08),
-          const SkillsElementPhone(),
-          spaceV(Get.height * .08),
-          AboutMePhone(
-            controller: controller,
-          ),
-          spaceV(Get.height * .08),
-          const ContactsPhone(),
-          spaceV(32),
-          const Divider(
-            color: grey,
-          ),
-          spaceV(16),
-          Text(
-            '© Copyright 2023. Made by JoulePhi',
-            style: greyText.copyWith(fontSize: 12),
-          ),
-          spaceV(16),
-        ],
-      ),
+      body: Obx(() {
+        if (Get.find<DataController>().pageIsLoading.value) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: primary,
+            ),
+          );
+        }
+
+        return ListView(
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          children: [
+            BannerPhone(controller: controller),
+            spaceV(Get.height * .08),
+            const QuotePhone(),
+            spaceV(Get.height * .08),
+            const ProjectsPhone(),
+            spaceV(Get.height * .08),
+            const SkillsElementPhone(),
+            spaceV(Get.height * .08),
+            AboutMePhone(
+              controller: controller,
+            ),
+            spaceV(Get.height * .08),
+            const ContactsPhone(),
+            spaceV(32),
+            const Divider(
+              color: grey,
+            ),
+            spaceV(16),
+            Text(
+              '© Copyright 2023. Made by JoulePhi',
+              style: greyText.copyWith(fontSize: 12),
+            ),
+            spaceV(16),
+          ],
+        );
+      }),
     );
   }
 }
