@@ -61,6 +61,14 @@ class ContactBox extends StatelessWidget {
                           ),
                           spaceV(16),
                           MessageCard(
+                            icon: 'assets/images/linkedin-lg.png',
+                            contacts: Get.find<DataController>()
+                                .contacts
+                                .linkedin
+                                .toString(),
+                          ),
+                          spaceV(16),
+                          MessageCard(
                             icon: 'assets/images/email.png',
                             contacts: Get.find<DataController>()
                                 .contacts
@@ -708,7 +716,9 @@ class BannerTop extends StatelessWidget {
                         onHover: (a) {
                           controller.contactButtonHover.value = a;
                         },
-                        onTap: () {},
+                        onTap: () {
+                          Get.offAllNamed('/contacts');
+                        },
                         isHover: controller.contactButtonHover.value),
                   )
                 ],

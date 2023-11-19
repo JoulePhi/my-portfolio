@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:portfolio/app/data/models/about_model.dart';
-import 'package:portfolio/app/data/models/home_model.dart';
 import 'package:portfolio/app/data/navbar_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -15,10 +13,11 @@ class HomeController extends GetxController {
   final viewAllIsHover = false.obs;
   final onQuoteFinished = false.obs;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final image1IsLoaded = false.obs;
+  final image2IsLoaded = false.obs;
 
   @override
   void onReady() {
-    // TODO: implement onReady
     super.onReady();
     Get.find<NavbarController>().selectedPage.value =
         Get.find<NavbarController>()

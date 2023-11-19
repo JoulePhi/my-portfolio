@@ -104,6 +104,13 @@ class ContactsView extends GetResponsiveView<ContactsController> {
                                   ),
                                   spaceV(16),
                                   MessageCard(
+                                      icon: 'assets/images/linkedin-lg.png',
+                                      contacts: Get.find<DataController>()
+                                          .contacts
+                                          .linkedin
+                                          .toString()),
+                                  spaceV(16),
+                                  MessageCard(
                                       icon: 'assets/images/email.png',
                                       contacts: Get.find<DataController>()
                                           .contacts

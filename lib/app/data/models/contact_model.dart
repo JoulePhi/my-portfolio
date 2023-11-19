@@ -3,8 +3,14 @@ class ContactModel {
   final String? email;
   final String? number;
   final String? instagram;
+  final String? linkedin;
 
-  ContactModel({this.description, this.email, this.instagram, this.number});
+  ContactModel(
+      {this.description,
+      this.email,
+      this.instagram,
+      this.number,
+      this.linkedin});
 
   factory ContactModel.fromJson(Map<String, dynamic>? json) {
     if (json == null) {
@@ -15,6 +21,7 @@ class ContactModel {
       email: json['email'],
       instagram: json['instagram'],
       number: json['number'],
+      linkedin: json['linkedin'],
     );
   }
 }

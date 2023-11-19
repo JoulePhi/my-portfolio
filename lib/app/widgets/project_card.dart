@@ -136,7 +136,7 @@ class ProjectCardGrid extends StatelessWidget {
             child: Image.network(
               projectModel.thumbnail!,
               width: double.infinity,
-              fit: BoxFit.fitWidth,
+              fit: BoxFit.fitHeight,
             ),
           ),
           Container(

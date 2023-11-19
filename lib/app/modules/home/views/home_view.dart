@@ -168,6 +168,23 @@ class HomeView extends GetResponsiveView<HomeController> {
                           ),
                         ),
                       ),
+                      spaceV(16),
+                      InkWell(
+                        onTap: () {
+                          launchUrl(Uri.parse(
+                              'https://www.linkedin.com/in/dzulfikar-sadid'));
+                        },
+                        child: StaggeredAnimate(
+                          position: 4,
+                          direction: Axis.vertical,
+                          duration: const Duration(seconds: 3),
+                          offset: -300,
+                          child: Image.asset(
+                            'assets/images/linkedin-lg.png',
+                            width: 20,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

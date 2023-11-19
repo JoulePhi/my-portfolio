@@ -89,6 +89,17 @@ class DrawerPhone extends GetView<NavbarController> {
               children: [
                 GestureDetector(
                   onTap: () {
+                    launchUrl(Uri.parse(
+                        'https://www.linkedin.com/in/dzulfikar-sadid'));
+                  },
+                  child: Image.asset(
+                    'assets/images/linkedin-lg.png',
+                    width: 32,
+                  ),
+                ),
+                spaceH(16),
+                GestureDetector(
+                  onTap: () {
                     launchUrl(Uri.parse('https://wa.link/ffogoi'));
                   },
                   child: Image.asset(
